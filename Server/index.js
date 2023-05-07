@@ -4,6 +4,62 @@ const mysql = require('mysql')
 const app = express();
 app.use(bodyParser.json());
 const portNumber = 3001
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'RTBMS'
+})
+
+connection.connect((err) => {
+  if(err){
+      console.log(err)
+  }else{
+      console.log("Database connected")
+  }
+})
+
+app.get("/api/fetch", (req, res) =>{
+  var data;
+  console.log(req.query)
+  const fetchpin = req.query.pin
+  const fetchType = req.query.type
+  let fetchBtype
+  if(fetchType.length>2){
+      fetchBtype = fetchType.charAt(0) +fetchType.charAt(1)+ (fetchType.charAt(2) === "1" ? "+" : "-");
+  }else{
+      fetchBtype = fetchType.charAt(0)+ (fetchType.charAt(1) === "1" ? "+" : "-");
+  }
+  console.log(typeof(fetchType))
+  console.log(fetchType)
+  connection.query(`Select * from Donors where Btype=\"${fetchBtype}\" and pincode between ${fetchpin -10} and ${fetchpin+10} ORDER BY pincode`, (err, result,fields) => {
+      if(err){
+          console.log(err)
+          res.json({"Message":"error"})
+      }else{
+          console.log(result)
+          data = JSON.parse(JSON.stringify(result))
+          res.json(data)
+      }
+  })
+})
+
+
+
+//port in which it is running
+app.listen(portNumber, () => {
+  console.log(`Server is listening on port ${portNumber}`)
+})
+
+
+
+
+
+
+
+
+
 // const PORT = process.env.PORT || 3001;
 // app.get('/api/donors', (req, res) => {
 //   res.json(donors);
@@ -46,51 +102,3 @@ const portNumber = 3001
 // });
 // const express = require('express');
 
-
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'RTBMS'
-})
-
-connection.connect((err) => {
-  if(err){
-      console.log(err)
-  }else{
-      console.log("Database connected")
-  }
-})
-
-app.get("/api/fetch", (req, res) =>{
-  var data;
-  console.log(req.query)
-  const fetchpin = req.query.pin
-  const fetchType = req.query.type
-  let fetchBtype
-  if(fetchType.length>2){
-      fetchBtype = fetchType.charAt(0) +fetchType.charAt(1)+ (fetchType.charAt(2) === "1" ? "+" : "-");
-  }else{
-      fetchBtype = fetchType.charAt(0)+ (fetchType.charAt(1) === "1" ? "+" : "-");
-  }
-  console.log(typeof(fetchType))
-  console.log(fetchType)
-  connection.query(`Select * from Donors where pincode=${fetchpin} and Btype=\"${fetchBtype}\"`, (err, result,fields) => {
-      if(err){
-          console.log(err)
-          res.json({"Message":"error"})
-      }else{
-          console.log(result)
-          data = JSON.parse(JSON.stringify(result))
-          res.json(data)
-      }
-  })
-})
-
-
-
-//port in which it is running
-app.listen(portNumber, () => {
-  console.log(`Server is listening on port ${portNumber}`)
-})

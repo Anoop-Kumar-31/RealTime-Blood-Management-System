@@ -5,14 +5,18 @@ import ListOfDonor from "./ListOfDonor";
 export default function ApplyForBlood() {
 
     const [donors, setDonors] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
     // console.log(donors[1])
+    const [pin,setPin]= useState()
 
     function handleSubmit(e) {
         e.preventDefault();
+        setSubmitted(true)
         const data = new FormData(e.target);
         const value = Object.fromEntries(data.entries())
-        let bloodGroup=value["bloodgroup"]
+        setPin(value.pincode)
         console.log(value)
+        let bloodGroup=value["bloodgroup"]
         if(bloodGroup.length>2){
             bloodGroup = bloodGroup.charAt(0) +bloodGroup.charAt(1)+ (bloodGroup.charAt(2) === "+" ? "1" : "0");
         }else{
@@ -76,7 +80,7 @@ export default function ApplyForBlood() {
                     <input id="sub" type="submit" value="Submit" />
                 </form>
             </div>,
-            <ListOfDonor donors={donors} />
+            <ListOfDonor donors={donors} submitted={submitted} pin={pin}/>
         ]
     );
 }
