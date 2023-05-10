@@ -19,7 +19,7 @@ function LandingPage(){
                   <div className='smallBox'>
                     <h3 style={{margin:'1vh 5px'}}>Services we provide are </h3>
                       <ul>
-                        <li>Fast and efficient.</li>
+                        <li >Fast and efficient.</li>
                         <li>Safe and secure.</li>
                         <li>Easy to use.</li>
                       </ul>

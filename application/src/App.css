@@ -105,7 +105,7 @@ ul{
   margin-inline-end: 0px;
   padding-inline-start: 20px;
 }
-::marker {
+.smallBox li ::marker {
     content: " ✔  ";
 }
 ::selection{
@@ -157,7 +157,7 @@ input{
   font-size: 1.7vh;
   font-weight: 600;
   margin: 1vh 0;
-  width: 50%;
+  width: 40%;
 }
 textarea{
   /* width: 100%; */
@@ -215,7 +215,7 @@ option{
   /* box-shadow: var(--shadow-color) 0 0 1px; */
   /* border: #CDB0B2 solid; */
   width: 50%;
-  padding: 2vh 5vw 4vh 5vw;
+  padding: 2vh 3vw 4vh 5vw;
   /* text-align: center; */
   margin: 5% 20%;
   /* background-color: rgb(255, 255, 255); */
@@ -333,4 +333,25 @@ p{
 }
 .donor-details{
   margin-left: 2vw;
+}
+
+.Verification{
+  position:fixed;
+  height: 101%;
+  width: 101%;
+  backdrop-filter: blur(3px);
+  /* transform: translateY(); */
+  transform: translate(-4.2%,-18.5%);
+  /* transform: translateX(-10vw); */
+}
+.InsideVerification{
+  transform: translateY(20vh);
+  background-color: #ffffff51;
+  border-radius: 30px;
+  min-width: 400px;
+  width:50%;
+  margin: auto;
+  box-shadow: var(--primary-color) 0px 0px 5px;
+  padding: 2vh 5vw 5vh 5vw;
+  backdrop-filter: blur(5px);
 }

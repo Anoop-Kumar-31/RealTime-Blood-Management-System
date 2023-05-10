@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import '../App.css';
 import ListOfDonor from "./ListOfDonor";
+import EmailVerification from "./EmailVerification";
+// import PhoneNumberVerification from "./PhoneNumberVerification";
 // import ListOfDonor from "./ListOfDonor";
 export default function ApplyForBlood() {
 
     const [donors, setDonors] = useState([]);
+    const [currentInfo, setCurrentInfo]= useState({});
     const [submitted, setSubmitted] = useState(false);
     // console.log(donors[1])
     const [pin,setPin]= useState()
@@ -15,6 +18,7 @@ export default function ApplyForBlood() {
         const data = new FormData(e.target);
         const value = Object.fromEntries(data.entries())
         setPin(value.pincode)
+        setCurrentInfo(value)
         console.log(value)
         let bloodGroup=value["bloodgroup"]
         if(bloodGroup.length>2){
@@ -37,8 +41,11 @@ export default function ApplyForBlood() {
             )
         // .catch(error => console.error(error));
     }
+    console.log(currentInfo.name)
     return (
         [
+            // <PhoneNumberVerification/>
+            <EmailVerification name={currentInfo.name}/>,
             <div class='formBox'>
                 <h1 className="heading" style={{ fontSize: '7vh' }}>Apply For Blood</h1>
                 <form onSubmit={handleSubmit}>
