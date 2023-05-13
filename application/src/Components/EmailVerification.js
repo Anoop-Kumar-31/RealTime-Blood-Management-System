@@ -76,7 +76,7 @@ const EmailVerification = (props) => {
         <h1>Hey there,</h1><hr/>
         <p>This verification is imperative for ensuring the security of your data.<br/>
         Apologies for the inconvenience.</p><br/>
-        Please verify your Email ID!
+        <p>Please verify your Email ID!</p>
         {otpSent ? (
           <form onSubmit={handleSubmitOTP}>
             <label>
@@ -85,22 +85,22 @@ const EmailVerification = (props) => {
             <input
               type="email"
               value={email}
+              style={{width:'70%'}}
               onChange={handleChangeEmail}
               required
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <label>
-              Enter OTP:
+            /><br/>
+            <label style={{marginTop:'2vh'}}>
+              Enter OTP:&nbsp;&nbsp;
             </label>
             <input
               type="text"
-              style={{ width: '10%' }}
+              style={{ width: '23%' }}
               placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required
             />&nbsp;&nbsp;
-            <button type="submit" style={{padding:'1vh 1vw'}}>Verify</button>
+            <button type="submit" style={{margin:'0',padding:'0.8vh 0.9vw'}}>Verify</button>
           </form>        
         ) : (
           <div >
@@ -111,22 +111,25 @@ const EmailVerification = (props) => {
                 type="email"
                 placeholder="Enter your email"
                 value={email}
+                style={{width:'70%'}}
                 onChange={handleChangeEmail}
                 required
-              />&nbsp;&nbsp;
-            <button onClick={handleSendOTP}>Send OTP</button>
+              />
+            <button onClick={handleSendOTP} style={{margin:'0',padding:'0.8vh 0.9vw'}}>Send OTP</button>
           </div>
         )}
         </div>
-        <div style={{width:'40%'}}>
-        <img src={LOGIN} alt="LoginPics" style={{width:'100%',height:'auto'}} />
+        <div style={{width:'40%',borderLeft:'#E4959A solid 2px',marginLeft:'2vw'}}>
+          <img src={LOGIN} alt="LoginPics" style={{width:'90%',
+          height:'70%',
+          margin:'20% 20%',shapeOutside:'solid black 1px'}} />
         </div>
       </div>
       </div>
     );
   } else {
     return (
-      <div>
+      <div style={{marginLeft:'4vw'}}>
         <label>
               Email:
             </label><br/>
@@ -134,9 +137,9 @@ const EmailVerification = (props) => {
                 type="email"
                 value={email}
                 onChange={handleChangeEmail}
-                required
-              />&nbsp;&nbsp;
-            <button onClick={handleLogout} style={{ marginLeft: '1.5vw' }}>Change Email</button>
+                disabled
+              />
+            <button onClick={handleLogout} style={{ marginLeft: '1vw' }}>Change Email</button>
       </div>
     )
   }

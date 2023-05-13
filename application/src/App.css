@@ -9,6 +9,16 @@
   --tertiary-color: #FF9BA1;
   --shadow-color:#CDB0B2;
 }
+@keyframes heroAnime {
+  0% {transform: translate(0%, -14%);}
+  50% {transform: translate(-.5%, -16%);}
+  100% {transform: translate(0%, -14%);}
+}
+.heroClass{
+  animation-name: heroAnime;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
 .logo{
   height: 10vh !important;
   margin-left: 5%;
@@ -23,6 +33,7 @@ body{
   padding: 1vh 4vw;
   color: var(--primary-color);
   word-wrap : break-word;
+  overflow-x: hidden;
 }
 .App{
   border-radius: 50px;
@@ -121,7 +132,7 @@ ul{
     width: 100%;
     margin:0 0 10vh 0;
   }
-  img{
+  .img{
     height:60vw !important;
     margin: 0 10vw;
     
@@ -138,6 +149,17 @@ ul{
     height: 500px !important;
     transform: translateX(80.5vw) !important;
   }
+  /* .donation{
+    display: grid;
+    grid-gap: 10px;
+    background-color: aqua;
+    padding:10px;
+    grid-template-areas: 
+    'area1 area1 area1 area1 area1 area1'
+    'area2 area2 area2 area2 area2 area2'
+    'area3 area3 area3 area3 area3 area3'
+    'area4 area4 area4 area4 area4 area4'!important;
+  } */
 }
 /* #slidez{
   width:'200px' !important;
@@ -346,12 +368,57 @@ p{
 }
 .InsideVerification{
   transform: translateY(20vh);
-  background-color: #ffffff51;
+  background-color: #fcdddd;
   border-radius: 30px;
   min-width: 400px;
   width:50%;
+  height: 50%;
   margin: auto;
   box-shadow: var(--primary-color) 0px 0px 5px;
   padding: 2vh 5vw 5vh 5vw;
   backdrop-filter: blur(5px);
+}
+
+.area1{
+  grid-area: area1;
+  /* background-color:#FFFFFF; */
+  padding: 2vh 2vw;
+}
+.area2{
+  grid-area: area2;
+  padding: 0 9vw 0 0;
+  width: 15vw;
+  transition: ease 2s;
+  /* max-height: ; */
+  /* background-color: aquamarine; */
+}
+
+.area3{
+  grid-area: area3;
+  padding-top: 10vh;
+
+  /* background-color:#FFFFFF; */
+}
+
+.area4{
+  grid-area: area4;
+  padding: 2vh 2vw;
+
+  /* background-color:azure; */
+}
+
+.donation{
+  display: grid;
+  grid-gap: 10px;
+  /* background-color: aqua; */
+  padding:10px;
+  grid-template-areas: 
+  'area1 area1 area1 area1 area1 area1 area1 area2 area2'
+  'area1 area1 area1 area1 area1 area1 area1 area2 area2'
+  'area1 area1 area1 area1 area1 area1 area1 area2 area2'
+  'area1 area1 area1 area1 area1 area1 area1 area2 area2'
+  'area3 area3 area3 area3 area4 area4 area4 area4 area4'
+  'area3 area3 area3 area3 area4 area4 area4 area4 area4'
+  'area3 area3 area3 area3 area4 area4 area4 area4 area4'
+  'area3 area3 area3 area3 area4 area4 area4 area4 area4'
 }

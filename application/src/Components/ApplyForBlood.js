@@ -78,12 +78,12 @@ export default function ApplyForBlood() {
                     <input type="text" id="country" name="country" placeholder="Country.." /><br />
                     <label for="pincode">Pincode</label><br />
                     <input type="number" id="pincode" name="pincode" placeholder="Pincode.." /><br />
-                    <label for="date">Date</label><br />
+                    {/* <label for="date">Date</label><br />
                     <input type="date" id="date" name="date" placeholder="Date.." /><br />
                     <label for="time">Time</label><br />
                     <input type="time" id="time" name="time" placeholder="Time.." /><br />
                     <label for="message">Message</label><br />
-                    <textarea id="message" name="message" placeholder="Write something.." style={{ height: '200px' }}></textarea><br /><br />
+                    <textarea id="message" name="message" placeholder="Write something.." style={{ height: '200px' }}></textarea><br /><br /> */}
                     <input id="sub" type="submit" value="Submit" />
                 </form>
             </div>,
