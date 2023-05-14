@@ -108,6 +108,9 @@ hr{
   text-shadow: rgb(255, 255, 255) 0 0 3px;
   font-weight:500;
 }
+.criteria li::marker{
+  content: " ✔  ";
+}
 ul{
   padding: 0;
   margin-block-start: 0em;
@@ -421,4 +424,106 @@ p{
   'area3 area3 area3 area3 area4 area4 area4 area4 area4'
   'area3 area3 area3 area3 area4 area4 area4 area4 area4'
   'area3 area3 area3 area3 area4 area4 area4 area4 area4'
+}
+
+
+/* for the table */
+
+table {
+  border-collapse: separate;
+  border-spacing: 8px;
+  width: fit-content;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border-radius: 15px;
+  box-shadow: grey 2px 2px 4px;
+  padding: 10px;
+
+}
+
+th {
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+  padding: 1.5vh 2vw;
+  width: fit-content !important;
+  /* border: 1px solid var(--secondary-color); */
+  text-align: center;
+  font-size: 2.2vh;
+  text-shadow: #9c777a 2px 2px;
+  font-weight:900;
+  border-radius: 15px;
+  box-shadow: grey 2px 2px 4px;
+}
+
+td {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  padding: 1vh 2vw;
+  border-radius: 15px;
+  border: 1px solid var(--tertiary-color);
+  width: fit-content !important;
+  box-shadow: grey 2px 2px 4px;
+  text-shadow: #9c777a .1px .1px;
+  /* text-align: center; */
+
+  /* border: 1px solid var(--secondary-color); */
+}
+
+
+
+
+/* Footer css */
+
+.footer {
+  /* background-color: var(); */
+  color: #c28084;
+  padding: 20px;
+  text-align: center;
+  text-shadow: 0 0 2px rgb(255, 232, 232);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  margin-bottom: 20px;
+}
+
+.footer-section h3 {
+  color: #c28084;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-section p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.social-media-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.social-media-links a {
+  color: #c28084;
+  margin-right: 10px;
+  font-size: 20px;
+}
+i{
+  color: #c28084;
+  font-size: 2vw;
+}
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #c28084;
+  font-size: medium;
 }

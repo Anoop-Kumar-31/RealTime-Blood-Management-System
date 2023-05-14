@@ -8,6 +8,7 @@ import ApplyForBlood from './Components/ApplyForBlood'
 import Form from './Components/Form'
 import AboutUs from './Components/AboutUs';
 import Blogs from './Components/Blogs';
+import Footer from './Components/Footer';
 // import ListOfDonor from './Components/ListOfDonor';
 function App() {
   return (
@@ -28,9 +29,7 @@ function App() {
       <Route index element={<LandingPage/>}/>
       </Route> */}
       <hr/>
-      <div class="Donor List">
-        <p>© 2021 Blood Bank All Rights Reserved</p>
-      </div>
+      <Footer/>
     </div>
   );
 }
