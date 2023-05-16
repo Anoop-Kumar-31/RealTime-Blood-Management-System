@@ -126,7 +126,10 @@ ul{
   background: var(--primary-color);
   color: var(--secondary-color);
 }
-@media only screen and (max-width:770px){
+@media only screen and (max-width:912px){
+  .heading{
+    border-right: none !important;
+  }
   .mainBody{
     display: block;
     padding:none;
@@ -152,6 +155,17 @@ ul{
     height: 500px !important;
     transform: translateX(80.5vw) !important;
   }
+  .bloodTbl{
+    flex-direction: column !important;
+  }
+  .table{
+    width:100% !important;
+    padding: 0 8vw;
+  }
+  .tableContent{
+    width:100% !important;
+    transform: translate(0,0) !important;
+  }
   /* .donation{
     display: grid;
     grid-gap: 10px;
@@ -163,6 +177,20 @@ ul{
     'area3 area3 area3 area3 area3 area3'
     'area4 area4 area4 area4 area4 area4'!important;
   } */
+  .main-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .Cquote{
+    width: 80% !important;
+    border-right: none !important;
+    padding: 0 10vw;
+    font-size: 280% !important;
+  }
+  .contact-container {
+    transform: translateX(0) !important;
+  }
+  
 }
 /* #slidez{
   width:'200px' !important;
@@ -310,8 +338,8 @@ option{
 
 .blogContent{
   /* background:linear-gradient(to right,#ff9ba293,#ffffff5d); */
-  background-color: #e6e5e535;
-  padding: 5vh 5vw 4vh 5vw;
+  background-color: #ffffff18;
+  padding: 2vh 5vw 4vh 5vw;
   border-radius: 5vw;
   margin:0 4vw 2vh 4vw;
   
@@ -354,9 +382,15 @@ p{
   padding-left: 3vw;
 }
 .donor-card{
-  margin-left: 5vw;
+  margin: 2vh 3vw;
+  padding: 2vh 3vw;
+  background-color: #ffd6d6;
+  border-radius: 30px;
+  width: 44%;
+  box-shadow: var(--shadow-color) 2px 2px 2px;
 }
 .donor-details{
+  line-height: 3.5vh;
   margin-left: 2vw;
 }
 
@@ -526,4 +560,98 @@ i{
   font-size: 12px;
   color: #c28084;
   font-size: medium;
+}
+
+
+/*Contact us*/
+
+.Cquote{
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #c28084;
+  color:rgba(255, 255, 255, 0);
+  width: 50%;
+  font-size: 300%;
+  text-align: center;
+  padding: 0 1vw;
+  border-right: var(--primary-color) solid 5px;
+}
+
+.main-container{
+  display: flex;
+}
+.contact-container {
+  transform: translateX(5vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+}
+
+.contact-heading {
+  font-size: 30px;
+  margin-bottom: 10px;
+  text-shadow: var(--secondary-color) 1px 1px 1px;
+}
+
+.contact-form {
+  width: 400px;
+  background-color: #fde0e0;
+  padding: 20px;
+  border-radius: 10px;
+  padding: 50px;
+  border:var(--shadow-color) solid 2px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-btn {
+  background-color: #d48c91;
+  color: white;
+  border: none;
+  padding: 1F0px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 40%;
+}
+
+.submit-btn:hover {
+  background-color: #c28084;
+}
+
+/*swal customization*/
+.swal-container {
+  font-family: Arial, sans-serif;
+}
+
+.swal-popup {
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.swal-title {
+  color: var(--primary-color);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.swal-text {
+  color: var(--tertiary-color);
+  font-size: 16px;
 }

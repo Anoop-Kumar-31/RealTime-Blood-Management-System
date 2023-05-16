@@ -6,10 +6,10 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <h3>Company Name</h3>
-          <p>123 Company Street, City, Country</p>
-          <p>Email: company@example.com</p>
-          <p>Phone: +1234567890</p>
+          <h3>HeartBeat Pvt. Limited</h3>
+          <p>Chandigarh University, Mohali -140413</p>
+          <p>Email: heatbeat@healthcare.com</p>
+          <p>Phone: +91 987-654-3210</p>
         </div>
         <div className="footer-section" style={{padding:'0 2vw'}}>
           <h3>Country of Origin</h3>
@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
         <div className="footer-section">
           <h3>Follow Us</h3>
-          <div className="social-media-links" style={{width:'10vw'}}>
+          <div className="social-media-links" style={{width:'15vw'}}>
             <a href="https://www.linkedin.com" target="_blank" rel="linkedin">
               <i className="fab fa-linkedin"></i>
             </a>

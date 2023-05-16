@@ -44,7 +44,6 @@ export default function ApplyForBlood() {
     console.log(currentInfo.name)
     return (
         [
-            // <PhoneNumberVerification/>
             <EmailVerification name={currentInfo.name}/>,
             <div class='formBox'>
                 <h1 className="heading" style={{ fontSize: '7vh' }}>Apply For Blood</h1>

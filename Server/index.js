@@ -10,10 +10,14 @@ app.use(bodyParser.json());
 const portNumber = 3001
 
 const connection = mysql.createConnection({
-  host: 'sql12.freemysqlhosting.ne',
-  user: 'sql12618080',
-  password: 'sLE5JlZczJ',
-  database: 'sql12618080'
+  // host: 'localhost',
+  // user: 'root',
+  // password: 'root',
+  // database: 'RTBMS'
+  host : "sql12.freemysqlhosting.net",
+  user : "sql12618080",
+  password : "sLE5JlZczJ",
+  database : "sql12618080",
 })
 
 connection.connect((err) => {
@@ -37,7 +41,7 @@ app.get("/api/fetch", (req, res) => {
   }
   console.log(typeof (fetchType))
   console.log(fetchType)
-  connection.query(`Select * from Donors where BloodGrp=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
+  connection.query(`Select * from donors where BloodGrp=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
     if (err) {
       console.log(err)
       res.json({ "Message": "error" })
@@ -49,71 +53,7 @@ app.get("/api/fetch", (req, res) => {
   })
 })
 
-
-
-//port in which it is running
-
-
-
-
-
-
-
-
-
-// const PORT = process.env.PORT || 3001;
-// app.get('/api/donors', (req, res) => {
-//   res.json(donors);
-// });
-
-// const donors = [
-//   { id: 1, name: 'John Doe', address: '123 Main St, Anytown USA' },
-//   { id: 2, name: 'Jane Smith', address: '456 Oak St, Anytown USA' },
-//   { id: 3, name: 'Bob Johnson', address: '789 Maple St, Anytown USA' },
-// ];
-
-
-// app.post('/api/data', (req, res) => {
-//   console.log(req.body);
-//   res.json(donors);
-// });
-
-// ==============================================================================
-// const otpMap = new Map();
-
-// app.post('/api/send-otp', (req, res) => {
-//   const { phoneNumber } = req.body;
-
-//   // Generate OTP
-//   const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-
-//   // Save the OTP in memory
-//   otpMap.set(phoneNumber, otp);
-
-//   // Send OTP to the provided phone number (mocked for demonstration purposes)
-//   // You would typically use an SMS service provider to send the OTP
-
-//   // Simulate success response
-//   res.sendStatus(200);
-// });
-
-// app.post('/api/verify-otp', (req, res) => {
-//   const { phoneNumber, otp } = req.body;
-
-//   // Retrieve the OTP from memory
-//   const savedOtp = otpMap.get(phoneNumber);
-
-//   if (savedOtp && savedOtp === otp) {
-//     // OTP verification succeeded
-//     // You may want to remove the OTP from memory after successful verification
-//     otpMap.delete(phoneNumber);
-//     res.sendStatus(200);
-//   } else {
-//     // OTP verification failed
-//     res.sendStatus(401);
-//   }
-// });
-
+// email OTP generation transport and verification
 const emailUsername = 'amt312002@gmail.com';
 const emailPassword = 'kviwlgpkztmfreqa';
 const emailService = 'www.gmail.com';
@@ -144,8 +84,23 @@ app.post('/api/send-otp', (req, res) => {
   const mailOptions = {
     from: emailUsername,
     to: email,
-    subject: 'Your OTP',
-    text: `Your OTP: ${otp}`,
+    subject: 'One Time Password from HeatBeat',
+    html: `<div style="text-align: center;">
+    <img src="cid:logo" alt="Logo" width="200px" height="auto">
+    <h1 style="color: #FF9BA1;">Thank you for visiting our website.</h1>
+    <p>If possible, please consider helping others by registering as a donor and saving the lives of people in need.</p>
+    <p>Below is your One Time Password (OTP):</p>
+    <h2>OTP: ${otp}</h2>
+    </div>
+    <div><br><br><br><br>
+    <p style="font-weight:bold;">HeartBeat Pvt. Limited<br>Chandigarh University,<br>Mohali - 140413</p>
+    </div>`,
+
+    attachments: [{
+      filename: 'LOGO.png',
+      path: './LOGO.png',
+      cid: 'logo'
+    }]
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -180,6 +135,47 @@ app.post('/api/verify-otp', (req, res) => {
 });
 
 
+
+app.post('/api/register', (req, res) => {
+  // console.log(req)
+  const name = req.body.name;
+  const bloodtype = req.body.bloodtype;
+  const pin = req.body.pin;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  const address = req.body.address;
+  const state = req.body.state;
+  const age = req.body.age;
+
+  let countt;
+  let fetchBtype;
+  if (bloodtype.length > 2) {
+    fetchBtype = bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-');
+  } else {
+    fetchBtype = bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+  }
+
+  connection.query('SELECT COUNT(id) AS count FROM donors', (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+    } else {
+      console.log(result);
+      countt = result[0].count;
+
+      const query = `INSERT INTO donors VALUES (\"${countt+1}\", \"${name}\", \"${age}\", \"${phone}\", \"${email}\", \"${fetchBtype}\", \"${pin}\", \"${state}\", \"${address}\","")`;
+      connection.query(query, (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ success: false, message: 'Internal server error' });
+        } else {
+          console.log(result);
+          res.status(200).json({ success: true, message: 'Registration successful' });
+        }
+      });
+    }
+  });
+});
 
 
 app.post("/api/register", (req, res) => {

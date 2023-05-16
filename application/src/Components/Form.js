@@ -1,14 +1,35 @@
 import React, { useState } from "react";
 import EmailVerification from "./EmailVerification";
+// import { useNavigate } from 'react-router-dom';
+import '../App.css'
+import Swal from 'sweetalert2';
 export default function Form(){
-
+    // const [name, setName] = useState('');
+    // const [bloodtype, setBloodType] = useState('');
+    // const [pin, setPin] = useState('');
+    // const [phone, setPhone] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [address, setAddress] = useState('');
+    // const [state, setState] = useState('');
+    // const [age, setAge] = useState('');
     const [donors, setDonors] = useState([]);
     const [currentInfo, setCurrentInfo]= useState({});
     function handleSubmit(e) {
         e.preventDefault();
         const data = new FormData(e.target);
         const value = Object.fromEntries(data.entries())
-
+        console.log(value)
+        const valueDATA={
+            name:`${value["name"]}`,
+            bloodtype:`${value["bloodgroup"]}`,
+            pin:`${value["pincode"]}`,
+            phone:`${value["phone"]}`,
+            email:`${value["email"]}`,
+            address:`${value["city"]+", "+value["state"]}`,
+            state:`${value["state"]}`,
+            age:`${value["age"]}`
+        }
+        console.log(valueDATA)
         let bloodGroup=value["bloodgroup"]
         if(bloodGroup.length>2){
             bloodGroup = bloodGroup.charAt(0) +bloodGroup.charAt(1)+ (bloodGroup.charAt(2) === "+" ? "1" : "0");
@@ -16,18 +37,43 @@ export default function Form(){
             bloodGroup = bloodGroup.charAt(0)+ (bloodGroup.charAt(1) === "+" ? "1" : "0");
         }
 
-        fetch(`/api/post`
-            , {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({pin:`${value["pincode"]}`,type:`${bloodGroup}`})
-            }).then(
-                response => response.json()
-            ).then(
-                data => {
-                    setDonors(data)
-                }
-            )
+        fetch(`api/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(valueDATA),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              const swal = Swal.mixin({
+                timer: 2000, // Time in milliseconds
+                buttons: false, // Disable buttons
+                customClass: {
+                  container: 'swal-container',
+                  popup: 'swal-popup',
+                  title: 'swal-title',
+                  text: 'swal-text',
+                },
+              });
+              
+              if (data.success) {
+                swal.fire({
+                  title: 'Registration successful!',
+                  text: 'You have been successfully registered.',
+                  icon: 'success',
+                });
+                // const navigate = useNavigate();
+                // setTimeout(() => {
+                //     navigate('/home');
+                // }, 2000);
+              } else {
+                swal.fire({
+                  title: 'Registration failed.',
+                  text: 'Please try again.',
+                  icon: 'warning',
+                });
+              }
+            })
+            .catch((error) => console.error(error));
     }
     return(
         [
