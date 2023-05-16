@@ -10,10 +10,10 @@ app.use(bodyParser.json());
 const portNumber = 3001
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'RTBMS'
+  host: 'sql12.freemysqlhosting.ne',
+  user: 'sql12618080',
+  password: 'sLE5JlZczJ',
+  database: 'sql12618080'
 })
 
 connection.connect((err) => {
@@ -37,7 +37,7 @@ app.get("/api/fetch", (req, res) => {
   }
   console.log(typeof (fetchType))
   console.log(fetchType)
-  connection.query(`Select * from Donors where Btype=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
+  connection.query(`Select * from Donors where BloodGrp=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
     if (err) {
       console.log(err)
       res.json({ "Message": "error" })
@@ -182,27 +182,45 @@ app.post('/api/verify-otp', (req, res) => {
 
 
 
+app.post("/api/register", (req, res) => {
+  const name = req.body.name
+  const bloodtype = req.body.bloodtype
+  const pin = req.body.pin
+  const phone = req.body.phone
+  const email = req.body.email
+  const address = req.body.address
+  const state = req.body.state
+  const age = req.body.age
+
+  let count;
+  let fetchBtype
+  if(bloodtype.length>2){
+      fetchBtype = bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === "1" ? "+" : "-");
+  }else{
+      fetchBtype = bloodtype.charAt(0) + (bloodtype.charAt(1) === "1" ? "+" : "-");
+  }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  connection.query("select count(donors.id) from donors", (err, result, fields) => {
+    if(err){
+      console.log(err)
+      res.send(0)
+    } else{
+      console.log(result)
+      count =  JSON.parse(JSON.stringify(result))[0]['count(id)'] + 1
+    }
+  })
+  connection.query(`Insert into Donors values (${count}, \"${name}\",\"${age}\", \"${phone}\", \"${email}\", \"${fetchBtype}\", \"${pin}\", \"${state}\", \"${address}\")`, (err, result, fields) => {
+    if(err){
+      console.log(err)
+      res.send(0)
+    } else{
+      console.log(result)
+      connection.commit()
+      res.send(1)
+    }
+  })
+})
 
 
 app.listen(portNumber, () => {
