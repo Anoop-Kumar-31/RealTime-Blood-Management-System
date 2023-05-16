@@ -126,7 +126,10 @@ ul{
   background: var(--primary-color);
   color: var(--secondary-color);
 }
-@media only screen and (max-width:770px){
+@media only screen and (max-width:912px){
+  .heading{
+    border-right: none !important;
+  }
   .mainBody{
     display: block;
     padding:none;
@@ -151,6 +154,17 @@ ul{
     position: relative;
     height: 500px !important;
     transform: translateX(80.5vw) !important;
+  }
+  .bloodTbl{
+    flex-direction: column !important;
+  }
+  .table{
+    width:100% !important;
+    padding: 0 8vw;
+  }
+  .tableContent{
+    width:100% !important;
+    transform: translate(0,0) !important;
   }
   /* .donation{
     display: grid;
@@ -368,9 +382,15 @@ p{
   padding-left: 3vw;
 }
 .donor-card{
-  margin-left: 5vw;
+  margin: 2vh 3vw;
+  padding: 2vh 3vw;
+  background-color: #ffd6d6;
+  border-radius: 30px;
+  width: 44%;
+  box-shadow: var(--shadow-color) 2px 2px 2px;
 }
 .donor-details{
+  line-height: 3.5vh;
   margin-left: 2vw;
 }
 
@@ -612,4 +632,26 @@ i{
 
 .submit-btn:hover {
   background-color: #c28084;
+}
+
+/*swal customization*/
+.swal-container {
+  font-family: Arial, sans-serif;
+}
+
+.swal-popup {
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.swal-title {
+  color: var(--primary-color);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.swal-text {
+  color: var(--tertiary-color);
+  font-size: 16px;
 }

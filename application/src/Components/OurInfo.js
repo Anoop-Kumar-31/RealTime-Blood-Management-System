@@ -21,8 +21,8 @@ const people = [
         id: 2,
         name: 'Aayush Kumar Singh',
         image: AKS,
-        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        phone: '+1234567890',
+        about: 'I am Aayush Kumar Singh, and I am honored to possess an esteemed academic accolade from the prestigious St.Karen\'s Secondary School, situated in the revered confines of Patna, Bihar. Presently, I am wholeheartedly engrossed in an impassioned quest for knowledge as I embark on a profound educational odyssey within the exalted domain of a Bachelor of Engineering program, specializing in the ever-evolving realm of Computer Science Engineering at Chandigarh University, Mohali. I conscientiously shoulder the responsibility of spearheading the Back-end development of websites, while concurrently utilizing my expertise to enhance specific facets of the database infrastructure.',
+        phone: '+91  823-591-6478',
         email: 'aayushkumarsingh2002@example.com',
         social: {
             linkedin: 'https://www.linkedin.com/in/aayush-kumar-singh-41b560231/',

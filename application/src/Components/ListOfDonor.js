@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import '../App.css'
-export default function ListOfDonor(props) {
-  let Recommenation = []
+
+export default function ListOfDonor(props) {  
+  var Recommenation = []
+  for(let i=0;i<Recommenation.length;i++){
+    Recommenation.pop()
+  }
+  // console.log("recommedation value: ",Recommenation)
   // const [donors, setDonors] = useState([]);
   // useEffect(() => {
   //     fetch('/api/data')
@@ -10,15 +15,15 @@ export default function ListOfDonor(props) {
   //         .catch(error => console.error(error));
   // }, []);
   // useEffect(() => {
-  //     fetch('/api')
-  //         .then((response) => response.json())
-  //         .then((data) => setDonors(data));
-  // }, []);
-  // console.log("\n\n\n\n\n")
-  // console.log(props)
-  // console.log(props["donors"])
-  // console.log(props["pin"])
-  // console.log(props["submitted"])
+    //     fetch('/api')
+    //         .then((response) => response.json())
+    //         .then((data) => setDonors(data));
+    // }, []);
+    // console.log("\n\n\n\n\n")
+    // console.log(props)
+    // console.log(props["donors"])
+    // console.log(props["pin"])
+    // console.log(props["submitted"])
   if (props["submitted"]) {
     if (props["donors"].length > 0) {
       return (
@@ -28,11 +33,14 @@ export default function ListOfDonor(props) {
             props["donors"].map(donor => {
               if (donor.pincode == props["pin"]) {
                 return (
-                  <div className="donor-card" key={donor.Name}>
-                    <h2>{donor.Name}</h2>
+                  <div className="donor-card" key={donor.name}>
+                    <h2>{donor.name}</h2><hr/>
                     <div className='donor-details'>
+                      <p>Email: {donor.Email}</p>
+                      <p>Phone Number: {donor.phone}</p>
+                      <p>Address: {donor.Address}</p>
                       <p>PINCODE: {donor.pincode}</p>
-                      <p>Blood type: {donor.Btype}</p>
+                      <p>Blood type: {donor.BloodGrp}</p>
                     </div>
                   </div>)
               } else {
@@ -44,11 +52,14 @@ export default function ListOfDonor(props) {
           {
             Recommenation.map(donor => {
               return (
-                <div className="donor-card" key={donor.Name}>
-                  <h2>{donor.Name}</h2>
+                <div className="donor-card" key={donor.name}>
+                  <h2>{donor.name}</h2><hr/>
                   <div className='donor-details'>
+                    <p>Email: {donor.Email}</p>
+                    <p>Phone Number: {donor.phone}</p>
+                    <p>Address: {donor.Address}</p>
                     <p>PINCODE: {donor.pincode}</p>
-                    <p>Blood type: {donor.Btype}</p>
+                    <p>Blood type: {donor.BloodGrp}</p>
                   </div>
                 </div>)
             })

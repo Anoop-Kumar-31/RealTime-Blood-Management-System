@@ -10,10 +10,14 @@ app.use(bodyParser.json());
 const portNumber = 3001
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'RTBMS'
+  // host: 'localhost',
+  // user: 'root',
+  // password: 'root',
+  // database: 'RTBMS'
+  host : "sql12.freemysqlhosting.net",
+  user : "sql12618080",
+  password : "sLE5JlZczJ",
+  database : "sql12618080",
 })
 
 connection.connect((err) => {
@@ -37,7 +41,7 @@ app.get("/api/fetch", (req, res) => {
   }
   console.log(typeof (fetchType))
   console.log(fetchType)
-  connection.query(`Select * from Donors where Btype=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
+  connection.query(`Select * from donors where BloodGrp=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
     if (err) {
       console.log(err)
       res.json({ "Message": "error" })
@@ -131,6 +135,47 @@ app.post('/api/verify-otp', (req, res) => {
 });
 
 
+
+app.post('/api/register', (req, res) => {
+  // console.log(req)
+  const name = req.body.name;
+  const bloodtype = req.body.bloodtype;
+  const pin = req.body.pin;
+  const phone = req.body.phone;
+  const email = req.body.email;
+  const address = req.body.address;
+  const state = req.body.state;
+  const age = req.body.age;
+
+  let countt;
+  let fetchBtype;
+  if (bloodtype.length > 2) {
+    fetchBtype = bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-');
+  } else {
+    fetchBtype = bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+  }
+
+  connection.query('SELECT COUNT(id) AS count FROM donors', (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+    } else {
+      console.log(result);
+      countt = result[0].count;
+
+      const query = `INSERT INTO donors VALUES (\"${countt+1}\", \"${name}\", \"${age}\", \"${phone}\", \"${email}\", \"${fetchBtype}\", \"${pin}\", \"${state}\", \"${address}\","")`;
+      connection.query(query, (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ success: false, message: 'Internal server error' });
+        } else {
+          console.log(result);
+          res.status(200).json({ success: true, message: 'Registration successful' });
+        }
+      });
+    }
+  });
+});
 
 
 

@@ -4,6 +4,7 @@ import people from './OurInfo'
 function AboutUs(){
       return (
         <div className="about-us">
+        <h1 className="heading" style={{fontSize:'5vh'}}> Devlopers of this website: </h1>
           {people.map((person) => (
             <div key={person.id} style={{display:'flex',width:'70%',minWidth:'680px'}}>
               <div style={{width:'30%',padding:'5vh 2vw 5vh 3vw'}}>
