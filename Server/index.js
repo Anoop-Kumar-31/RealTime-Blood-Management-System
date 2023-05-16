@@ -49,71 +49,7 @@ app.get("/api/fetch", (req, res) => {
   })
 })
 
-
-
-//port in which it is running
-
-
-
-
-
-
-
-
-
-// const PORT = process.env.PORT || 3001;
-// app.get('/api/donors', (req, res) => {
-//   res.json(donors);
-// });
-
-// const donors = [
-//   { id: 1, name: 'John Doe', address: '123 Main St, Anytown USA' },
-//   { id: 2, name: 'Jane Smith', address: '456 Oak St, Anytown USA' },
-//   { id: 3, name: 'Bob Johnson', address: '789 Maple St, Anytown USA' },
-// ];
-
-
-// app.post('/api/data', (req, res) => {
-//   console.log(req.body);
-//   res.json(donors);
-// });
-
-// ==============================================================================
-// const otpMap = new Map();
-
-// app.post('/api/send-otp', (req, res) => {
-//   const { phoneNumber } = req.body;
-
-//   // Generate OTP
-//   const otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
-
-//   // Save the OTP in memory
-//   otpMap.set(phoneNumber, otp);
-
-//   // Send OTP to the provided phone number (mocked for demonstration purposes)
-//   // You would typically use an SMS service provider to send the OTP
-
-//   // Simulate success response
-//   res.sendStatus(200);
-// });
-
-// app.post('/api/verify-otp', (req, res) => {
-//   const { phoneNumber, otp } = req.body;
-
-//   // Retrieve the OTP from memory
-//   const savedOtp = otpMap.get(phoneNumber);
-
-//   if (savedOtp && savedOtp === otp) {
-//     // OTP verification succeeded
-//     // You may want to remove the OTP from memory after successful verification
-//     otpMap.delete(phoneNumber);
-//     res.sendStatus(200);
-//   } else {
-//     // OTP verification failed
-//     res.sendStatus(401);
-//   }
-// });
-
+// email OTP generation transport and verification
 const emailUsername = 'amt312002@gmail.com';
 const emailPassword = 'kviwlgpkztmfreqa';
 const emailService = 'www.gmail.com';

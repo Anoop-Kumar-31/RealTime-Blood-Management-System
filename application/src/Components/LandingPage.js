@@ -35,7 +35,7 @@ function LandingPage() {
       <div className='mainBody'>
         <div className='left'>
           <h1 className='heading'>Be the reason for someone’s heartbeat</h1>
-          <div style={{ width: '65%', margin: '0 0 5vh 0' }}><p>Hello this is sample text. Hello. Hello this is sample text. Hello this is sample text. Hello this is sample text. Hello this is sample text. Hello this is sample text. Hello this is sample text. Hello this is sample text. </p></div>
+          <div style={{ width: '65%', margin: '0 0 5vh 0' }}><p>We provide a platform for individuals in society who want to be part of the noble cause of blood donation, both those who wish to contribute and those who are in need.</p></div>
           <div style={{ padding: '0 0 0 2vw', display: 'flex', alignContent: 'auto' }}>
             <a href="/Form"><button className='butt' style={{padding:'1.5vh 2vw',marginTop:'2vh'}}>Register as Donor</button></a>
             <a href="/ApplyForBlood"><button className='butt' style={{padding:'1.5vh 2vw',marginTop:'2vh'}}> Apply for Blood</button></a>
