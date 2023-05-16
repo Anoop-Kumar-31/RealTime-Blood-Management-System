@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import{Route,Routes} from 'react-router-dom'
 import LandingPage from './Components/LandingPage';
@@ -10,7 +9,8 @@ import AboutUs from './Components/AboutUs';
 import Blogs from './Components/Blogs';
 import Footer from './Components/Footer';
 import ContactUs from './Components/ContactUs';
-// import ListOfDonor from './Components/ListOfDonor';
+
+//Routing all the pages/component using Navigation bar
 function App() {
   return (
     <div>
@@ -22,14 +22,7 @@ function App() {
         <Route path="/ApplyForBlood" element={<ApplyForBlood/>}/>
         <Route path="/Blogs" element={<Blogs/>}/>
         <Route path="/ContactUs" element={<ContactUs/>}/>
-        {/* <Route path='/ListOfDonor' element={<ListOfDonor/>}/> */}
-        {/* <Route path="/about" element={<AboutUs/>}/> */}
       </Routes>
-      {/* <LandingPage/>
-      <Route path="/" element={<Nav/>}>
-      <Route path="/" element={<LandingPage/>}/>
-      <Route index element={<LandingPage/>}/>
-      </Route> */}
       <hr/>
       <Footer/>
     </div>
@@ -37,4 +30,3 @@ function App() {
 }
 
 export default App;
-//#FFFFFF -> #FF9BA1

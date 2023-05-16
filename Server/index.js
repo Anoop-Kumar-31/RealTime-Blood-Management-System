@@ -80,8 +80,23 @@ app.post('/api/send-otp', (req, res) => {
   const mailOptions = {
     from: emailUsername,
     to: email,
-    subject: 'Your OTP',
-    text: `Your OTP: ${otp}`,
+    subject: 'One Time Password from HeatBeat',
+    html: `<div style="text-align: center;">
+    <img src="cid:logo" alt="Logo" width="200px" height="auto">
+    <h1 style="color: #FF9BA1;">Thank you for visiting our website.</h1>
+    <p>If possible, please consider helping others by registering as a donor and saving the lives of people in need.</p>
+    <p>Below is your One Time Password (OTP):</p>
+    <h2>OTP: ${otp}</h2>
+    </div>
+    <div><br><br><br><br>
+    <p style="font-weight:bold;">HeartBeat Pvt. Limited<br>Chandigarh University,<br>Mohali - 140413</p>
+    </div>`,
+
+    attachments: [{
+      filename: 'LOGO.png',
+      path: './LOGO.png',
+      cid: 'logo'
+    }]
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
