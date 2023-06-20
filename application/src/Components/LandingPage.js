@@ -29,7 +29,7 @@ function LandingPage() {
   };
   setTimeout(() => {
     setAniDone(isAboveThreshold ? true : false)
-  }, 2000)
+  }, 2500)
   return (
     [
       <div className='mainBody'>
@@ -127,7 +127,7 @@ function LandingPage() {
             </table>
           </div>
           <div className='tableContent' style={{ width: '40%', transform: 'translateY(-6%)', marginLeft: '3vw' }}>
-            <p style={{ lineHeight: '3.5vh', color: '#c28084' }}>
+            <p style={{ lineHeight: '3.5vh', color: '#c28084',textShadow: 'rgb(255,255,255) 0 0 2.5px'}}>
               Donating blood is a simple yet powerful act that can save lives. To ensure the safety and effectiveness of donated blood, certain criteria must be met. Donors should:<br />
               <ul className="criteria">
                 <li style={{ marginLeft: '2vw' }}>Be in good health.</li>

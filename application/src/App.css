@@ -14,6 +14,10 @@
   50% {transform: translate(-.5%, -16%);}
   100% {transform: translate(0%, -14%);}
 }
+*{
+  scroll-behavior:smooth;
+}
+
 .heroClass{
   animation-name: heroAnime;
   animation-duration: 4s;
@@ -316,6 +320,8 @@ option{
   }
 } */
 /* width */
+
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -432,7 +438,7 @@ p{
 
 .area3{
   grid-area: area3;
-  padding-top: 10vh;
+  padding-top: 5vh;
 
   /* background-color:#FFFFFF; */
 }
