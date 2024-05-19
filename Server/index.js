@@ -18,13 +18,18 @@ async function connectDb() {
   if (!connectionString) {
     throw new Error('POSTGRES_URL not set in environment variables');
   }
-  return db.connect({ connectionString });
+  return connectionString;
 }
-connectDb().then(() => {
-  console.log('Database connected');
-}).catch((error) => {
-  console.error('Error connecting to database:', error);
-});
+async function testDbConnection() {
+  const connectionString = await connectDb();
+  try {
+    const result = await db.query('SELECT NOW()');
+    console.log('Connected to PostgreSQL:', result.rows[0]);
+  } catch (err) {
+    console.error('Error executing query', err.stack);
+  }
+}
+testDbConnection();
 // const connection = mysql.createConnection({
 //   // host: 'localhost',
 //   // user: 'root',
