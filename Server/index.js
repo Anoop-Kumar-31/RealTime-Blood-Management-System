@@ -10,7 +10,7 @@ let sendOtp=0
 
 const app = express();
 app.use(bodyParser.json());
-const portNumber = process.env.PORT || 3001;
+const portNumber = process.env.PORT || 10000;
 
 
 async function connectDb() {
@@ -218,10 +218,10 @@ app.post('/api/register', async (req, res) => {
     const result = await client.query('SELECT COUNT(id) AS count FROM donors');
     const count = result.rows[0].count;
 
-    const query = `INSERT INTO donors (id, name, age, phone, email, blood_group, pincode, state, address, day_free) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, '')`;
+    const Query = `INSERT INTO donors (id, name, age, phone, email, blood_group, pincode, state, address, day_free) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, '')`;
     const values = [count + 1, name, age, phone, email, fetchBtype, pin, state, address];
 
-    await client.query(query, values);
+    await client.query(Query, values);
     res.status(200).json({ success: true, message: 'Registration successful' });
   } catch (err) {
     console.error(err);
