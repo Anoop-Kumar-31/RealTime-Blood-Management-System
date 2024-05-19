@@ -1,14 +1,9 @@
-// import dotenv from 'dotenv';
-// // Load environment variables from .env.local file
-// dotenv.config({ path: '.env.local' });
-
-const dotenv = require('dotenv');
-dotenv.config({ path: '.env.local' });
 const express = require("express");
 const bodyParser = require('body-parser');
 const mysql = require('mysql')
 const nodemailer = require('nodemailer');
 const e = require("express");
+require('dotenv').config();
 // import {db} from '@vercel/postgres';
 let sendOtp=0
 
@@ -28,7 +23,7 @@ const connection = mysql.createConnection({
   password : process.env.POSTGRES_PASSWORD,
   database : process.env.POSTGRES_DATABASE,
 })
-
+console.log(process.env.POSTGRES_HOST);
 connection.connect((err) => {
   if (err) {
     console.log(err)
