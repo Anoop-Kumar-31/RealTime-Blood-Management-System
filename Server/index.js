@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 // const mysql = require('mysql')
-const db = require('@vercel/postgres');
+// const db = require('@vercel/postgres');
+const { Pool } = require('pg');
 const nodemailer = require('nodemailer');
 const e = require("express");
 require('dotenv').config();
@@ -13,23 +14,44 @@ app.use(bodyParser.json());
 const portNumber = process.env.PORT || 10000;
 
 
-async function connectDb() {
-  const connectionString = process.env.POSTGRES_URL;
-  if (!connectionString) {
-    throw new Error('POSTGRES_URL not set in environment variables');
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
-  return connectionString;
-}
+});
+
+console.log('PostgreSQL Host:', process.env.POSTGRES_HOST);
+
+// Test the PostgreSQL connection
 async function testDbConnection() {
-  const connectionString = await connectDb();
   try {
-    const result = await db.query('SELECT NOW()');
+    const result = await pool.query('SELECT NOW()');
     console.log('Connected to PostgreSQL:', result.rows[0]);
   } catch (err) {
     console.error('Error executing query', err.stack);
   }
 }
+
 testDbConnection();
+
+// async function connectDb() {
+//   const connectionString = process.env.POSTGRES_URL;
+//   if (!connectionString) {
+//     throw new Error('POSTGRES_URL not set in environment variables');
+//   }
+//   return connectionString;
+// }
+// async function testDbConnection() {
+//   const connectionString = await connectDb();
+//   try {
+//     const result = await db.query('SELECT NOW()');
+//     console.log('Connected to PostgreSQL:', result.rows[0]);
+//   } catch (err) {
+//     console.error('Error executing query', err.stack);
+//   }
+// }
+// testDbConnection();
 // const connection = mysql.createConnection({
 //   // host: 'localhost',
 //   // user: 'root',
