@@ -1,7 +1,9 @@
-import dotenv from 'dotenv';
-// Load environment variables from .env.local file
-dotenv.config({ path: '.env.local' });
+// import dotenv from 'dotenv';
+// // Load environment variables from .env.local file
+// dotenv.config({ path: '.env.local' });
 
+const dotenv = require('dotenv');
+dotenv.config({ path: '.env.local' });
 const express = require("express");
 const bodyParser = require('body-parser');
 const mysql = require('mysql')
