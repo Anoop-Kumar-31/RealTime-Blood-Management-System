@@ -1,23 +1,30 @@
+import dotenv from 'dotenv';
+// Load environment variables from .env.local file
+dotenv.config({ path: '.env.local' });
+
 const express = require("express");
 const bodyParser = require('body-parser');
 const mysql = require('mysql')
 const nodemailer = require('nodemailer');
-
+const e = require("express");
+// import {db} from '@vercel/postgres';
 let sendOtp=0
 
 const app = express();
 app.use(bodyParser.json());
-const portNumber = 3001
+const portNumber = process.env.PORT || 3001;
+
+
 
 const connection = mysql.createConnection({
   // host: 'localhost',
   // user: 'root',
   // password: 'root',
   // database: 'RTBMS'
-  host : "sql12.freemysqlhosting.net",
-  user : "sql12618080",
-  password : "sLE5JlZczJ",
-  database : "sql12618080",
+  host : process.env.POSTGRES_HOST,
+  user : process.env.POSTGRES_USER,
+  password : process.env.POSTGRES_PASSWORD,
+  database : process.env.POSTGRES_DATABASE,
 })
 
 connection.connect((err) => {
@@ -56,10 +63,10 @@ app.get("/api/fetch", (req, res) => {
 // email OTP generation transport and verification
 const emailUsername = 'amt312002@gmail.com';
 const emailPassword = 'urew baqu jdwy nrpw';
-const emailService = 'www.gmail.com';
+const emailHost = 'smtp.gmail.com';
 
 var smtpConfig = {
-  host: 'smtp.gmail.com',
+  host: emailHost,
   port: 465,
   secure: true, // use SSL
   auth: {
@@ -79,23 +86,22 @@ app.post('/api/send-otp', (req, res) => {
 
   // Generate the OTP (you may use any OTP generation logic here)
   const otp = Math.floor(1000 + Math.random() * 9000);
-  console.log(otp)
+  // console.log(otp)
   // Send email using Nodemailer
   const mailOptions = {
     from: emailUsername,
     to: email,
     subject: 'One Time Password from HeatBeat',
     html: `<div style="text-align: center;">
-    <img src="cid:logo" alt="Logo" width="200px" height="auto">
-    <h1 style="color: #FF9BA1;">Thank you for visiting our website.</h1>
-    <p>If possible, please consider helping others by registering as a donor and saving the lives of people in need.</p>
-    <p>Below is your One Time Password (OTP):</p>
-    <h2>OTP: ${otp}</h2>
-    </div>
-    <div><br><br><br><br>
-    <p style="font-weight:bold;">HeartBeat Pvt. Limited<br>Chandigarh University,<br>Mohali - 140413</p>
-    </div>`,
-
+            <img src="cid:logo" alt="Logo" width="200px" height="auto">
+            <h1 style="color: #FF9BA1;">Thank you for visiting our website.</h1>
+            <p>If possible, please consider helping others by registering as a donor and saving the lives of people in need.</p>
+            <p>Below is your One Time Password (OTP):</p>
+            <h2>OTP: ${otp}</h2>
+          /div>
+          <div><br><br><br><br>
+            <p style="font-weight:bold;">HeartBeat Pvt. Limited<br>Chandigarh University,<br>Mohali - 140413</p>
+          </div>`,
     attachments: [{
       filename: 'LOGO.png',
       path: './LOGO.png',
@@ -109,7 +115,7 @@ app.post('/api/send-otp', (req, res) => {
       return res.status(500).json({ error: 'Failed to send OTP' });
     }
 
-    console.log('OTP sent:', info.response);
+    // console.log('OTP sent:', info.response);
     sendOtp=otp;
     res.status(200).json({ success: true});
     // res.append({otpnumber:{otp}})
@@ -173,30 +179,6 @@ app.post('/api/register', (req, res) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(portNumber, () => {
   console.log(`Server is listening on port ${portNumber}`)
