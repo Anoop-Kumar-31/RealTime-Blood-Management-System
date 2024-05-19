@@ -55,7 +55,7 @@ app.get("/api/fetch", (req, res) => {
 
 // email OTP generation transport and verification
 const emailUsername = 'amt312002@gmail.com';
-const emailPassword = 'kviwlgpkztmfreqa';
+const emailPassword = 'urew baqu jdwy nrpw';
 const emailService = 'www.gmail.com';
 
 var smtpConfig = {
@@ -124,9 +124,6 @@ app.post('/api/verify-otp', (req, res) => {
     return res.status(400).json({ error: 'Email and OTP are required' });
   }
 
-  // In a real-world scenario, you would compare the received OTP with the stored OTP in your database
-
-  // Assuming the received OTP is valid for the sake of this example
   if (otp == sendOtp) {
     res.status(200).json({ success: true });
   } else {
