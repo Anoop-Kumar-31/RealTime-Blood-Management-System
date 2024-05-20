@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 const portNumber = process.env.PORT || 10000;
 
 app.use(cors({
-  origin: 'https://bloodmanagementsystem-anoop.vercel.app/',
+  origin: 'https://bloodmanagementsystem-anoop.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 })); 
