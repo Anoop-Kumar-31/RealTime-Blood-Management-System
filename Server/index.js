@@ -86,28 +86,6 @@ testDbConnection();
 // })
 
 app.get("/api/fetch",async (req, res) => {
-  // var data;
-  // console.log(req.query)
-  // const fetchpin = req.query.pin
-  // const fetchType = req.query.type
-  // let fetchBtype
-  // if (fetchType.length > 2) {
-  //   fetchBtype = fetchType.charAt(0) + fetchType.charAt(1) + (fetchType.charAt(2) === "1" ? "+" : "-");
-  // } else {
-  //   fetchBtype = fetchType.charAt(0) + (fetchType.charAt(1) === "1" ? "+" : "-");
-  // }
-  // console.log(typeof (fetchType))
-  // console.log(fetchType)
-  // connection.query(`Select * from donors where BloodGrp=\"${fetchBtype}\" and pincode between ${fetchpin - 10} and ${fetchpin + 10} ORDER BY pincode`, (err, result, fields) => {
-  //   if (err) {
-  //     console.log(err)
-  //     res.json({ "Message": "error" })
-  //   } else {
-  //     console.log(result)
-  //     data = JSON.parse(JSON.stringify(result))
-  //     res.json(data)
-  //   }
-  // })
   const client = await connectDb();
   try {
     const fetchpin = parseInt(req.query.pin, 10);
@@ -165,8 +143,8 @@ app.post('/api/send-otp', (req, res) => {
             <p>If possible, please consider helping others by registering as a donor and saving the lives of people in need.</p>
             <p>Below is your One Time Password (OTP):</p>
             <h2>OTP: ${otp}</h2>
-          /div>
-          <div><br><br><br><br>
+          /div><br/><br/><br/><br/>
+          <div>
             <p style="font-weight:bold;">HeartBeat Pvt. Limited<br>Chandigarh University,<br>Mohali - 140413</p>
           </div>`,
     attachments: [{
