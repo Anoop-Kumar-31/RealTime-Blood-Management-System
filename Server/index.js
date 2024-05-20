@@ -19,7 +19,7 @@ const portNumber = process.env.PORT || 10000;
 const cors = require('cors');
 app.use(cors({
   credentials: true,
-  origin: ['https://bloodmanagementsystem-anoop.vercel.app','https://bloodmanagementsystem-anoop.vercel.app/' , 'https://realtime-blood-management-system.onrender.com'],
+  origin: ['https://bloodmanagementsystem-anoop.vercel.app','https://bloodmanagementsystem-anoop.vercel.app/' , 'https://realtime-blood-management-system.onrender.com','https://kit.fontawesome.com/','https://realtime-blood-management-system.onrender.com/api','https://realtime-blood-management-system.onrender.com/api/'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
