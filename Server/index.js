@@ -5,16 +5,10 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const nodemailer = require('nodemailer');
 
-const cors = require('cors');
 
 
 const e = require("express");
 require('dotenv').config();
-
-
-
-
-
 
 let sendOtp=0
 
@@ -22,16 +16,12 @@ const app = express();
 app.use(bodyParser.json());
 const portNumber = process.env.PORT || 10000;
 
+const cors = require('cors');
 app.use(cors({
-  origin: 'https://bloodmanagementsystem-anoop.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-})); 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-  });
+  origin: ['https://bloodmanagementsystem-anoop.vercel.app','https://bloodmanagementsystem-anoop.vercel.app/' , 'https://realtime-blood-management-system.onrender.com'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+}));
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
