@@ -19,7 +19,7 @@ const portNumber = process.env.PORT || 10000;
 const cors = require('cors');
 app.use(cors({
   credentials: true,
-  origin: ['https://bloodmanagementsystem-anoop.vercel.app','https://bloodmanagementsystem-anoop.vercel.app/' , 'https://realtime-blood-management-system.onrender.com','https://kit.fontawesome.com/','https://realtime-blood-management-system.onrender.com/api','https://realtime-blood-management-system.onrender.com/api/'],
+  origin: ['https://bloodmanagementsystem-anoop.vercel.app','https://bloodmanagementsystem-anoop.vercel.app'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
@@ -46,6 +46,7 @@ testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
   const client = await connectDb();
+  res.setHeader('Access-Control-Allow-Origin', 'https://bloodmanagementsystem-anoop.vercel.app');
   try {
     const fetchpin = parseInt(req.query.pin, 10);
     const fetchType = req.query.type;
@@ -83,7 +84,7 @@ const transporter = nodemailer.createTransport(smtpConfig);
 
 app.post('/api/send-otp', (req, res) => {
   const { email } = req.body;
-
+  res.setHeader('Access-Control-Allow-Origin', 'https://bloodmanagementsystem-anoop.vercel.app');
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
   }
@@ -129,7 +130,7 @@ app.post('/api/send-otp', (req, res) => {
 
 app.post('/api/verify-otp', (req, res) => {
   const { email, otp } = req.body;
-
+  res.setHeader('Access-Control-Allow-Origin', 'https://bloodmanagementsystem-anoop.vercel.app');
   if (!email || !otp) {
     return res.status(400).json({ error: 'Email and OTP are required' });
   }
@@ -144,6 +145,7 @@ app.post('/api/verify-otp', (req, res) => {
 
 
 app.post('/api/register', async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://bloodmanagementsystem-anoop.vercel.app');
   const client = await connectDb();
   try {
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
