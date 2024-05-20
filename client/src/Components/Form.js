@@ -38,6 +38,7 @@ export default function Form(){
         }
 
         fetch(`https://realtime-blood-management-system.onrender.com/api/register`, {
+            mode: 'no-cors',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(valueDATA),

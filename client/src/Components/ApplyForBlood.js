@@ -29,6 +29,7 @@ export default function ApplyForBlood() {
         // return <ListOfDonor/>
         fetch(`https://realtime-blood-management-system.onrender.com/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`
             , {
+                mode: 'no-cors',
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
                 // body: JSON.stringify({pin:"271001",type:"A+"})
