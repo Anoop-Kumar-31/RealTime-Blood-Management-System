@@ -23,17 +23,11 @@ app.use(bodyParser.json());
 const portNumber = process.env.PORT || 10000;
 
 app.use(cors({
-  origin: 'https://bloodmanagementsystem-anoop.vercel.app',
-  methods: 'GET,POST,PUT,DELETE',
+  origin: 'https://bloodmanagementsystem-anoop.vercel.app/',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 })); 
 
-app.use((req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
-  next();
-});
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
@@ -57,9 +51,6 @@ async function testDbConnection() {
 testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const client = await connectDb();
   try {
     const fetchpin = parseInt(req.query.pin, 10);
@@ -97,10 +88,6 @@ var smtpConfig = {
 const transporter = nodemailer.createTransport(smtpConfig);
 
 app.post('/api/send-otp', (req, res) => {
-  
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const { email } = req.body;
 
   if (!email) {
@@ -147,10 +134,6 @@ app.post('/api/send-otp', (req, res) => {
 });
 
 app.post('/api/verify-otp', (req, res) => {
-  
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const { email, otp } = req.body;
 
   if (!email || !otp) {
@@ -167,10 +150,6 @@ app.post('/api/verify-otp', (req, res) => {
 
 
 app.post('/api/register', async (req, res) => {
-  
-  res.setHeader('Access-Control-Allow-Origin','*');
-  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const client = await connectDb();
   try {
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
