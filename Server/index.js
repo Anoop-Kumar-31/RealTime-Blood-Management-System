@@ -11,11 +11,7 @@ const cors = require('cors');
 const e = require("express");
 require('dotenv').config();
 
-app.use(cors({
-  origin: 'https://bloodmanagementsystem-anoop.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+
 
 
 
@@ -26,6 +22,11 @@ const app = express();
 app.use(bodyParser.json());
 const portNumber = process.env.PORT || 10000;
 
+app.use(cors({
+  origin: 'https://bloodmanagementsystem-anoop.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
