@@ -38,8 +38,8 @@ const PhoneNumberVerification = () => {
         try {
           // Make an API call to your server to verify the OTP
           const response = await fetch('https://realtime-blood-management-system.onrender.com/api/verify-otp', {
-            mode: 'no-cors',
             method: 'POST',
+            mode: 'no-cors',
             headers: {
               'Content-Type': 'application/json',
             },
