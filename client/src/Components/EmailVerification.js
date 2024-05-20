@@ -20,7 +20,6 @@ const EmailVerification = (props) => {
       // Make an API call to your server to send the OTP
       const response = await fetch('https://realtime-blood-management-system.onrender.com/api/send-otp', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -51,7 +50,6 @@ const EmailVerification = (props) => {
       // Make an API call to your server to verify the OTP
       const response = await fetch('https://realtime-blood-management-system.onrender.com/api/verify-otp', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },

@@ -4,9 +4,22 @@ const bodyParser = require('body-parser');
 // const db = require('@vercel/postgres');
 const { Pool } = require('pg');
 const nodemailer = require('nodemailer');
+
+const cors = require('cors');
+
+
 const e = require("express");
 require('dotenv').config();
-// import {db} from '@vercel/postgres';
+
+app.use(cors({
+  origin: 'https://bloodmanagementsystem-anoop.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
+
+
+
 let sendOtp=0
 
 const app = express();
