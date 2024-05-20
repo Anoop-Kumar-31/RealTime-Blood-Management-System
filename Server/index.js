@@ -24,9 +24,16 @@ const portNumber = process.env.PORT || 10000;
 
 app.use(cors({
   origin: 'https://bloodmanagementsystem-anoop.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  methods: 'GET,POST,PUT,DELETE',
   credentials: true,
-}));
+})); 
+
+app.use((req,res,next)=>{
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
+  next();
+});
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
@@ -49,43 +56,10 @@ async function testDbConnection() {
 
 testDbConnection();
 
-// async function connectDb() {
-//   const connectionString = process.env.POSTGRES_URL;
-//   if (!connectionString) {
-//     throw new Error('POSTGRES_URL not set in environment variables');
-//   }
-//   return connectionString;
-// }
-// async function testDbConnection() {
-//   const connectionString = await connectDb();
-//   try {
-//     const result = await db.query('SELECT NOW()');
-//     console.log('Connected to PostgreSQL:', result.rows[0]);
-//   } catch (err) {
-//     console.error('Error executing query', err.stack);
-//   }
-// }
-// testDbConnection();
-// const connection = mysql.createConnection({
-//   // host: 'localhost',
-//   // user: 'root',
-//   // password: 'root',
-//   // database: 'RTBMS'
-//   host : process.env.POSTGRES_HOST,
-//   user : process.env.POSTGRES_USER,
-//   password : process.env.POSTGRES_PASSWORD,
-//   database : process.env.POSTGRES_DATABASE,
-// })
-// console.log(process.env.POSTGRES_HOST);
-// connection.connect((err) => {
-//   if (err) {
-//     console.log(err)
-//   } else {
-//     console.log("Database connected")
-//   }
-// })
-
 app.get("/api/fetch",async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const client = await connectDb();
   try {
     const fetchpin = parseInt(req.query.pin, 10);
@@ -123,6 +97,10 @@ var smtpConfig = {
 const transporter = nodemailer.createTransport(smtpConfig);
 
 app.post('/api/send-otp', (req, res) => {
+  
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const { email } = req.body;
 
   if (!email) {
@@ -169,6 +147,10 @@ app.post('/api/send-otp', (req, res) => {
 });
 
 app.post('/api/verify-otp', (req, res) => {
+  
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const { email, otp } = req.body;
 
   if (!email || !otp) {
@@ -185,44 +167,10 @@ app.post('/api/verify-otp', (req, res) => {
 
 
 app.post('/api/register', async (req, res) => {
-  // console.log(req)
-  // const name = req.body.name;
-  // const bloodtype = req.body.bloodtype;
-  // const pin = req.body.pin;
-  // const phone = req.body.phone;
-  // const email = req.body.email;
-  // const address = req.body.address;
-  // const state = req.body.state;
-  // const age = req.body.age;
-
-  // let countt;
-  // let fetchBtype;
-  // if (bloodtype.length > 2) {
-  //   fetchBtype = bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-');
-  // } else {
-  //   fetchBtype = bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-  // }
-
-  // connection.query('SELECT COUNT(id) AS count FROM donors', (err, result) => {
-  //   if (err) {
-  //     console.error(err);
-  //     res.status(500).json({ success: false, message: 'Internal server error' });
-  //   } else {
-  //     console.log(result);
-  //     countt = result[0].count;
-
-  //     const query = `INSERT INTO donors VALUES (\"${countt+1}\", \"${name}\", \"${age}\", \"${phone}\", \"${email}\", \"${fetchBtype}\", \"${pin}\", \"${state}\", \"${address}\","")`;
-  //     connection.query(query, (err, result) => {
-  //       if (err) {
-  //         console.error(err);
-  //         res.status(500).json({ success: false, message: 'Internal server error' });
-  //       } else {
-  //         console.log(result);
-  //         res.status(200).json({ success: true, message: 'Registration successful' });
-  //       }
-  //     });
-  //   }
-  // });
+  
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers','X-requested-With,Content-Type');
   const client = await connectDb();
   try {
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
