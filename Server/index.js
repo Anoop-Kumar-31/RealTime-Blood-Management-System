@@ -46,7 +46,11 @@ testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
   const client = await connectDb();
-  res.setHeader('Access-Control-Allow-Origin', 'https://bloodmanagementsystem-anoop.vercel.app');
+  res.setHeader('Access-Control-Allow-Origin', ['https://bloodmanagementsystem-anoop.vercel.app','https://realtime-blood-management-system.onrender.com']);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
   try {
     const fetchpin = parseInt(req.query.pin, 10);
     const fetchType = req.query.type;
