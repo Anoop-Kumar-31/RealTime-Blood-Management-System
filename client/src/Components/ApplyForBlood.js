@@ -32,7 +32,7 @@ export default function ApplyForBlood() {
                 method: 'GET',
                 mode: 'cors',
                 headers: { 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'https://realtime-blood-management-system.onrender.com'
+                'Access-Control-Allow-Origin': ['https://realtime-blood-management-system.onrender.com', 'https://bloodmanagementsystem-anoop.vercel.app'],
                  },
                 // body: JSON.stringify({pin:"271001",type:"A+"})
             }).then(
