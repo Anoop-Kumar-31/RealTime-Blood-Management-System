@@ -31,7 +31,9 @@ export default function ApplyForBlood() {
             , {
                 method: 'GET',
                 mode: 'cors',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'https://realtime-blood-management-system.onrender.com'
+                 },
                 // body: JSON.stringify({pin:"271001",type:"A+"})
             }).then(
                 response => response.json()
