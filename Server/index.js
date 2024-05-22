@@ -14,20 +14,20 @@ let sendOtp=0
 
 const app = express();
 app.use(bodyParser.json());
-const portNumber = process.env.PORT || 10000;
+const portNumber = process.env.PORT || 5432;
 
 const cors = require('cors');
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'application/json');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'application/json');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 
 
 
-const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', 'https://realtime-blood-management-system.onrender.com'];
+const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', ];
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);
