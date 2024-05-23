@@ -33,7 +33,7 @@ export default function ApplyForBlood() {
                 // mode: 'cors',
                 headers: { 'Content-Type': 'application/json',
                  },
-                body: JSON.stringify({pin:`${pincode}`,type:`${bloodGroup}`})
+                body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
             }).then(
                 response => response.json()
             ).then(
