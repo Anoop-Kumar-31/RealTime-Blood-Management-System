@@ -88,10 +88,12 @@ app.get("/api/fetch",async (req, res) => {
     const fetchType = req.query.type;
     let fetchBtype = fetchType.length > 2 ? fetchType.charAt(0) + fetchType.charAt(1) + (fetchType.charAt(2) === "1" ? "+" : "-") : fetchType.charAt(0) + (fetchType.charAt(1) === "1" ? "+" : "-");
 
-    const query = `SELECT * FROM donors WHERE blood_group = $1 AND pincode BETWEEN $2 AND $3 ORDER BY pincode`;
+    // const query = `SELECT * FROM donors WHERE blood_group = $1 AND pincode BETWEEN $2 AND $3 ORDER BY pincode`;
+    const query = `SELECT * FROM donors WHERE blood_group = 'A+' AND pincode BETWEEN 271000 AND 271005 ORDER BY pincode`;
     const values = [fetchBtype, fetchpin - 10, fetchpin + 10];
 
-    const result = await client.query(query, values);
+    // const result = await client.query(query, values);
+    const result = await client.query(query);
     console.log(res)
     res.json(result.rows);
   } catch (err) {
