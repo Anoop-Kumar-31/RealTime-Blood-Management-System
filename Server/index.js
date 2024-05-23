@@ -82,7 +82,7 @@ testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
   const client = await pool.connect();
-  console.log(client.query('SELECT * FROM donors ORDER BY id'))
+  // console.log(client.query('SELECT * FROM donors ORDER BY id'))
   try {
     const fetchpin = parseInt(req.query.pin, 10);
     const fetchType = req.query.type;

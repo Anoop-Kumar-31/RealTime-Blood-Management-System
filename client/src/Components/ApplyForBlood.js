@@ -40,8 +40,7 @@ export default function ApplyForBlood() {
                 data => {
                     setDonors(data)
                 }
-            )
-        // .catch(error => console.error(error));
+            ).catch(error => consolde.error(error));
     }
     console.log(currentInfo.name)
     return (
