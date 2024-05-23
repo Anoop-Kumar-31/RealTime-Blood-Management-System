@@ -85,6 +85,7 @@ app.get("/api/fetch",async (req, res) => {
     const values = [fetchBtype, fetchpin - 10, fetchpin + 10];
 
     const result = await client.query(query, values);
+    console.log(res)
     res.json(result.rows);
   } catch (err) {
     console.error(err);
