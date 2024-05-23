@@ -4,17 +4,18 @@ const bodyParser = require('body-parser');
 // const db = require('@vercel/postgres');
 const { Pool } = require('pg');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
+console.log(process.env.POSTGRES_URL)
 
 
 
 const e = require("express");
-require('dotenv').config();
 
 let sendOtp=0
 
 const app = express();
 app.use(bodyParser.json());
-const portNumber = process.env.PORT || 5432;
+const portNumber = process.env.PORT || 5432;//10000
 
 const cors = require('cors');
 // app.use(function(req, res, next) {
@@ -53,7 +54,7 @@ app.use((req, res, next) => {
 })
 
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL,
+  connectionString: "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify",
   ssl: {
     rejectUnauthorized: false
   }
@@ -71,7 +72,7 @@ async function testDbConnection() {
   }
 }
 async function connectDb() {
-  const connectionString = process.env.POSTGRES_URL;
+  const connectionString = "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify";
   if (!connectionString) {
     throw new Error('POSTGRES_URL not set in environment variables');
   }
