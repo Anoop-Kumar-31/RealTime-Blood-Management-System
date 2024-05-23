@@ -81,7 +81,7 @@ async function connectDb() {
 testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
-  const client = await pool.connect();
+  // const client = await pool.connect();
   // console.log(client.query('SELECT * FROM donors ORDER BY id'))
   try {
     const fetchpin = parseInt(req.query.pin, 10);
@@ -91,14 +91,15 @@ app.get("/api/fetch",async (req, res) => {
     const query = `SELECT * FROM donors WHERE blood_group = $1 AND pincode BETWEEN $2 AND $3 ORDER BY pincode`;
     const values = [fetchBtype, fetchpin - 10, fetchpin + 10];
 
-    const result = await client.query(query, values);
+    // const result = await client.query(query, values);
+    const result = await pool.query(query, values);
     console.log(res)
     res.json(result.rows);
   } catch (err) {
     console.error('Error fetching data:', err);
     res.status(500).json({ "Message": "error" });
   } finally {
-    client.release();
+    // client.release();
   }
 })
 
