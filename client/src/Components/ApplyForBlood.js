@@ -35,11 +35,11 @@ export default function ApplyForBlood() {
                  },
                 // body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
             })
-            // .then(
-            //     response => response.json()
-            // )
             .then(
-                data => setDonors(data.json())
+                response => response.json()
+            )
+            .then(
+                data => setDonors(data)
             )
     }
     console.log(currentInfo.name)
