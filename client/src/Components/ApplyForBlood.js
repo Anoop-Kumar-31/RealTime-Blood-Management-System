@@ -27,7 +27,7 @@ export default function ApplyForBlood() {
             bloodGroup = bloodGroup.charAt(0)+ (bloodGroup.charAt(1) === "+" ? "1" : "0");
         }
         // return <ListOfDonor/>
-        fetch(`https://realtime-blood-management-system.onrender.com/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`//
+        fetch(`https://realtime-blood-management-system.onrender.com/api/fetch?pin=${pin}&type=${bloodGroup}`
             , {
                 method: 'GET',
                 mode: 'no-cors',
