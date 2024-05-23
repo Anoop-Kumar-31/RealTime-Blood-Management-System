@@ -34,13 +34,13 @@ export default function ApplyForBlood() {
                 headers: { 'Content-Type': 'application/json',
                  },
                 // body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
-            }).then(
-                response => response.json()
-            ).then(
-                data => {
-                    setDonors(data)
-                }
-            ).catch(error => consolde.error(error));
+            })
+            // .then(
+            //     response => response.json()
+            // )
+            .then(
+                data => setDonors(data.json())
+            )
     }
     console.log(currentInfo.name)
     return (
