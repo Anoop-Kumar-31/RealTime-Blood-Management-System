@@ -65,7 +65,7 @@ async function testDbConnection() {
 
 testDbConnection();
 
-app.get("/api/fetch",async (req, res) => {
+app.post("/api/fetch",async (req, res) => {
   const client = await connectDb();
 
   try {
