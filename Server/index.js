@@ -27,22 +27,30 @@ const cors = require('cors');
 
 
 
-const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', ];
-app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
-  allowedHeaders: 'X-Requested-With,content-type',
-  credentials: true
-}));
+// const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', ];
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+//       return callback(new Error(msg), false);
+//     }
+//     return callback(null, true);
+//   },
+//   methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
+//   allowedHeaders: 'X-Requested-With,content-type',
+//   credentials: true
+// }));
 
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Content-Type', 'application/json');
+  req.header('Access-Control-Expose-Headers', 'Content-Type')
+  next();
+})
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,

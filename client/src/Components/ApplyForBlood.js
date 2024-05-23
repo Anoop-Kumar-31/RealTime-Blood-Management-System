@@ -27,13 +27,13 @@ export default function ApplyForBlood() {
             bloodGroup = bloodGroup.charAt(0)+ (bloodGroup.charAt(1) === "+" ? "1" : "0");
         }
         // return <ListOfDonor/>
-        fetch(`https://realtime-blood-management-system.onrender.com/api/fetch`//fetch?pin=${value["pincode"]}&type=${bloodGroup}
+        fetch(`https://realtime-blood-management-system.onrender.com/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`//
             , {
                 method: 'GET',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json',
                  },
-                body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
+                // body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
             }).then(
                 response => response.json()
             ).then(
