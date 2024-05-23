@@ -70,7 +70,13 @@ async function testDbConnection() {
     console.error('Error executing query', err.stack);
   }
 }
-
+async function connectDb() {
+  const connectionString = process.env.POSTGRES_URL;
+  if (!connectionString) {
+    throw new Error('POSTGRES_URL not set in environment variables');
+  }
+  return connectionString;
+}
 testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
