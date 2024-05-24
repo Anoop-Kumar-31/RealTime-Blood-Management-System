@@ -81,7 +81,9 @@ async function connectDb() {
 testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
-  const client = await connectDb();
+  // const client = await Client.connect(connectDb());
+  //connect db
+  const client = await pool.connect();
 
   try {
     const fetchpin = parseInt(req.query.pin, 10);
