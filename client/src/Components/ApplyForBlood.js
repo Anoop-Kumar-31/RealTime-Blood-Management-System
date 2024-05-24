@@ -30,7 +30,7 @@ export default function ApplyForBlood() {
         fetch(`https://realtime-blood-management-system.onrender.com/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`//
             , {
                 method: 'GET',
-                mode: 'no-cors',
+                // mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json',
                  },
                 // body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
