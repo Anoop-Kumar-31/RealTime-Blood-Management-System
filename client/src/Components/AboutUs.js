@@ -4,7 +4,7 @@ import people from './OurInfo'
 function AboutUs(){
       return (
         <div className="about-us">
-        <h1 className="heading" style={{fontSize:'5vh'}}> Devlopers of this website: </h1>
+        <h1 className="heading" style={{fontSize:'5vh'}}> Devloper of this website: </h1>
           {people.map((person) => (
             <div key={person.id} style={{display:'flex',width:'70%',minWidth:'680px'}}>
               <div style={{width:'30%',padding:'5vh 2vw 5vh 3vw'}}>
@@ -19,13 +19,13 @@ function AboutUs(){
                 <div style={{margin:'-1vh 0 2vh 0',display:'flex',flexDirection:'row',justifyContent:'space-between',width:'20%'}}>
                   
                   <a href={person.social.linkedin} target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-linkedin"></i>
+                    <i className="fab fa-linkedin-in" style='color:#E4959A'></i>
                   </a>
                   <a href={person.social.github} target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-github"></i>
+                    <i className="fa fa-github" style='color:#E4959A'></i>
                   </a>
                   <a href={person.social.instagram} target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-instagram"></i>
+                    <i className="fab fa-instagram" style='color:#E4959A'></i>
                   </a>
                 </div>
               </div>
