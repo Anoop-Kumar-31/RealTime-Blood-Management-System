@@ -93,7 +93,7 @@ const { Client } = pg; // Destructure Client from the default export
 dotenv.config({ path: '.env.local' });
 
 // Ensure the connection string is loaded correctly
-const connectionString = process.env.POSTGRES_URL;
+const connectionString = "postgresql://anoop:IRftr19sqPs1EmzVMvI28tLlmdulQMYO@dpg-cqjt71tds78s73f4o16g-a.oregon-postgres.render.com/rdbms_e5ra?sslmode=no-verify";
 console.log('Connectionstring:', connectionString); // This should print your connection string
 
 if (!connectionString) {
@@ -161,7 +161,7 @@ async function main() {
   }
 
   // Specify the path to your CSV file
-  const csvFilePath = 'C:/Users/HP/Downloads/form.csv'; // Replace with your actual file path
+  const csvFilePath = 'form.csv'; // Replace with your actual file path
 
   // Process the CSV data
   await processCsvData(csvFilePath);

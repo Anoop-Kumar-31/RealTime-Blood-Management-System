@@ -7,7 +7,9 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 console.log(process.env.POSTGRES_URL)
 
+const { MongoClient } = require("mongodb");
 
+//LyVQhObJ05eD0Aub
 
 const e = require("express");
 
@@ -53,56 +55,70 @@ app.use((req, res, next) => {
   next();
 })
 
-const pool = new Pool({
-  connectionString: "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify",
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+// const pool = new Pool({
+//   connectionString: "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify",
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
 
-console.log('PostgreSQL Host:', process.env.POSTGRES_HOST);
+// console.log('PostgreSQL Host:', process.env.POSTGRES_HOST);
 
 // Test the PostgreSQL connection
-async function testDbConnection() {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    console.log('Connected to PostgreSQL:', result.rows[0]);
-  } catch (err) {
-    console.error('Error executing query', err.stack);
-  }
-}
-async function connectDb() {
-  const connectionString = "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify";
-  if (!connectionString) {
-    throw new Error('POSTGRES_URL not set in environment variables');
-  }
-  return connectionString;
-}
-testDbConnection();
+// async function testDbConnection() {
+//   try {
+//     const result = await pool.query('SELECT NOW()');
+//     console.log('Connected to PostgreSQL:', result.rows[0]);
+//   } catch (err) {
+//     console.error('Error executing query', err.stack);
+//   }
+// }
+// async function connectDb() {
+//   const connectionString = "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify";
+//   if (!connectionString) {
+//     throw new Error('POSTGRES_URL not set in environment variables');
+//   }
+//   return connectionString;
+// }
+// testDbConnection();
 
 app.get("/api/fetch",async (req, res) => {
-  // const client = await Client.connect(connectDb());
   //connect db
-  const client = await pool.connect();
+  // const client = await pool.connect();
 
-  try {
-    const fetchpin = parseInt(req.query.pin, 10);
-    const fetchType = req.query.type;
-    let fetchBtype = fetchType.length > 2 ? fetchType.charAt(0) + fetchType.charAt(1) + (fetchType.charAt(2) === "1" ? "+" : "-") : fetchType.charAt(0) + (fetchType.charAt(1) === "1" ? "+" : "-");
+  // try {
+  //   const fetchpin = parseInt(req.query.pin, 10);
+  //   const fetchType = req.query.type;
+  //   let fetchBtype = fetchType.length > 2 ? fetchType.charAt(0) + fetchType.charAt(1) + (fetchType.charAt(2) === "1" ? "+" : "-") : fetchType.charAt(0) + (fetchType.charAt(1) === "1" ? "+" : "-");
 
-    const query = `SELECT * FROM donors WHERE blood_group = $1 AND pincode BETWEEN $2 AND $3 ORDER BY pincode`;
-    const values = [fetchBtype, fetchpin - 10, fetchpin + 10];
+  //   const query = `SELECT * FROM donors WHERE blood_group = $1 AND pincode BETWEEN $2 AND $3 ORDER BY pincode`;
+  //   const values = [fetchBtype, fetchpin - 10, fetchpin + 10];
 
-    const result = await client.query(query, values);
-    console.log(res)
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ "Message": "error" });
-  } finally {
-    client.release();
-  }
-})
+  //   const result = await client.query(query, values);
+  //   console.log(res)
+  //   res.json(result.rows);
+  // } catch (err) {
+  //   console.error(err);
+  //   res.status(500).json({ "Message": "error" });
+  // } finally {
+  //   client.release();
+  // }
+  
+  const uri =
+    "mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
+    const client = new MongoClient(uri);
+    await client.connect();
+    const database = client.db("RTBMSdatabase");
+    const collection = database.collection("collection1");
+
+    const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+    const result = await collection.find({ blood_group: fetchBtype, pincode: { $gte: pin - 10, $lte: pin + 10 } }).toArray();
+    console.log(result);
+    res.json(result);
+    await client.close();
+}
+);
 
 // email OTP generation transport and verification
 const emailUsername = 'amt312002@gmail.com';
@@ -182,26 +198,40 @@ app.post('/api/verify-otp', (req, res) => {
 
 
 app.post('/api/register', async (req, res) => {
-  const client = await connectDb();
-  try {
-    const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+  // const client = await connectDb();
+  // try {
+  //   const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
 
-    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+  //   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
 
-    const result = await client.query('SELECT COUNT(id) AS count FROM donors');
-    const count = result.rows[0].count;
+  //   const result = await client.query('SELECT COUNT(id) AS count FROM donors');
+  //   const count = result.rows[0].count;
 
-    const Query = `INSERT INTO donors (id, name, age, phone, email, blood_group, pincode, state, address, day_free) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, '')`;
-    const values = [count + 1, name, age, phone, email, fetchBtype, pin, state, address];
+  //   const Query = `INSERT INTO donors (id, name, age, phone, email, blood_group, pincode, state, address, day_free) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, '')`;
+  //   const values = [count + 1, name, age, phone, email, fetchBtype, pin, state, address];
 
-    await client.query(Query, values);
-    res.status(200).json({ success: true, message: 'Registration successful' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: 'Internal server error' });
-  } finally {
-    client.release();
-  }
+  //   await client.query(Query, values);
+  //   res.status(200).json({ success: true, message: 'Registration successful' });
+  // } catch (err) {
+  //   console.error(err);
+  //   res.status(500).json({ success: false, message: 'Internal server error' });
+  // } finally {
+  //   client.release();
+  // }
+  
+  const uri ="mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
+  const client = new MongoClient(uri);
+  await client.connect();
+  const database = client.db("RTBMSdatabase");
+  const collection = database.collection("collection1");
+
+  const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+  let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+
+  const result = await collection.insertOne({ name, age, phone, email, blood_group: fetchBtype, pincode: pin, state, address, day_free: '' });
+  console.log(result);
+  res.status(200).json({ success: true, message: 'Registration successful' });
+  await client.close();
 });
 
 app.listen(portNumber, () => {
