@@ -103,21 +103,43 @@ app.get("/api/fetch",async (req, res) => {
   // } finally {
   //   client.release();
   // }
-  
-  const uri =
-    "mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
-    const client = new MongoClient(uri);
+  const uri = "mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31"; // Replace with your actual MongoDB connection string
+  const client = new MongoClient(uri);
+
+  try {
     await client.connect();
     const database = client.db("RTBMSdatabase");
     const collection = database.collection("collection1");
-
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-    const result = await collection.find({ blood_group: fetchBtype, pincode: { $gte: pin - 10, $lte: pin + 10 } }).toArray();
+    const result = await collection.find({ 
+      "Blood Group": `${fetchBtype}`, 
+      "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
+    }).toArray();
+
     console.log(result);
-    res.json(result);
+    // Assuming `res` is defined somewhere in your code
+    // res.json(result);
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  } finally {
     await client.close();
+  }
 }
+//   const uri =
+//     "mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
+//     const client = new MongoClient(uri);
+//     await client.connect();
+//     const database = client.db("RTBMSdatabase");
+//     const collection = database.collection("collection1");
+
+//     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+//     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+//     const result = await collection.find({ "Blood Group": `${fetchBtype}`, "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}`} }).toArray();
+//     console.log(result);
+//     res.json(result);
+//     await client.close();
+// }
 );
 
 // email OTP generation transport and verification
@@ -219,7 +241,7 @@ app.post('/api/register', async (req, res) => {
   //   client.release();
   // }
   
-  const uri ="mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
+  const uri ="mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31";
   const client = new MongoClient(uri);
   await client.connect();
   const database = client.db("RTBMSdatabase");
@@ -237,3 +259,50 @@ app.post('/api/register', async (req, res) => {
 app.listen(portNumber, () => {
   console.log(`Server is listening on port ${portNumber}`)
 })
+
+// async function fetch() {
+//   const uri ="mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31";
+//   const client = new MongoClient(uri);
+//   await client.connect();
+//   const database = client.db("RTBMSdatabase");
+//   const collection = database.collection("collection1");
+
+//   // const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+//   // let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+//   let fetchBtype="A+";
+//   let pin=271001;
+//   const result = await collection.find({ "Blood Group": `${fetchBtype}`, "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}`} }).toArray();
+//   console.log(result);
+//   res.json(result);
+//   await client.close();
+// }
+
+// const { MongoClient } = require('mongodb');
+
+// async function fetch() {
+//   const uri = "mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31"; // Replace with your actual MongoDB connection string
+//   const client = new MongoClient(uri);
+
+//   try {
+//     await client.connect();
+//     const database = client.db("RTBMSdatabase");
+//     const collection = database.collection("collection1");
+
+//     let fetchBtype = "A+";
+//     let pin = 271001;
+//     const result = await collection.find({ 
+//       "Blood Group": `${fetchBtype}`, 
+//       "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
+//     }).toArray();
+
+//     console.log(result);
+//     // Assuming `res` is defined somewhere in your code
+//     // res.json(result);
+//   } catch (error) {
+//     console.error('Error connecting to MongoDB:', error);
+//   } finally {
+//     await client.close();
+//   }
+// }
+
+// fetch();
