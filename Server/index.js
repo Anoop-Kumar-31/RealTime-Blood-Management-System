@@ -20,30 +20,30 @@ app.use(bodyParser.json());
 const portNumber = process.env.PORT || 5432;//10000
 
 const cors = require('cors');
-// app.use(function(req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'application/json');
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-//   next();
-// });
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'application/json');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 
 
-// const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', ];
-// app.use(cors({
-//   origin: function(origin, callback) {
-//     if (!origin) return callback(null, true);
-//     if (allowedOrigins.indexOf(origin) === -1) {
-//       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-//       return callback(new Error(msg), false);
-//     }
-//     return callback(null, true);
-//   },
-//   methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
-//   allowedHeaders: 'X-Requested-With,content-type',
-//   credentials: true
-// }));
+const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app'];
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
+  allowedHeaders: 'X-Requested-With,content-type',
+  credentials: true
+}));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
