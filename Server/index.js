@@ -105,6 +105,7 @@ app.get("/api/fetch",async (req, res) => {
   // }
   const uri = "mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31"; // Replace with your actual MongoDB connection string
   const client = new MongoClient(uri);
+  console.log("fetchfunction called");
 
   try {
     await client.connect();
