@@ -15,11 +15,11 @@ function AboutUs(){
                 <p style={{margin:'0'}}>{person.about}</p><br/>
                 <p style={{margin:'0'}}>Phone: {person.phone}</p>
                 <p style={{margin:'0'}}>Email: {person.email}</p>
-                {/* <p>Social media:</p>
+                <p>Social media:</p>
                 <div style={{margin:'-1vh 0 2vh 0',display:'flex',flexDirection:'row',justifyContent:'space-between',width:'20%'}}>
                   
                   <a href={person.social.linkedin} target="_blank" rel="noopener noreferrer">
-                    <i className="fab fa-linkedin" style='color:#E4959A'></i>
+                    <i className="fab fa-linkedin-in" style='color:#E4959A'></i>
                   </a>
                   <a href={person.social.github} target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-github" style='color:#E4959A'></i>
@@ -27,7 +27,7 @@ function AboutUs(){
                   <a href={person.social.instagram} target="_blank" rel="noopener noreferrer">
                     <i className="fab fa-instagram" style='color:#E4959A'></i>
                   </a>
-                </div> */}
+                </div>
               </div>
             </div>
           ))}
