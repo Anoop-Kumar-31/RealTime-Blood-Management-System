@@ -31,16 +31,16 @@ export default function ListOfDonor(props) {
           <h1>List of Donors</h1>
           {
             props["donors"].map(donor => {
-              if (donor.pincode == props["pin"]) {
+              if (donor.Pincode == props["pin"]) {
                 return (
-                  <div className="donor-card" key={donor.name}>
-                    <h2>{donor.name}</h2><hr/>
+                  <div className="donor-card" key={donor.Name}>
+                    <h2>{donor.Name}</h2><hr/>
                     <div className='donor-details'>
-                      <p>Email: {donor.Email}</p>
-                      <p>Phone Number: {donor.phone}</p>
+                      <p>Email: {donor.Username}</p>
+                      <p>Phone Number: {donor.PhoneNumber}</p>
                       <p>Address: {donor.Address}</p>
-                      <p>PINCODE: {donor.pincode}</p>
-                      <p>Blood type: {donor.BloodGrp}</p>
+                      <p>Pincode: {donor.Pincode}</p>
+                      <p>Blood type: {donor["Blood Group"]}</p>
                     </div>
                   </div>)
               } else {
@@ -52,14 +52,14 @@ export default function ListOfDonor(props) {
           {
             Recommenation.map(donor => {
               return (
-                <div className="donor-card" key={donor.name}>
-                  <h2>{donor.name}</h2><hr/>
+                <div className="donor-card" key={donor.Name}>
+                  <h2>{donor.Name}</h2><hr/>
                   <div className='donor-details'>
-                    <p>Email: {donor.Email}</p>
-                    <p>Phone Number: {donor.phone}</p>
+                    <p>Email: {donor.Username}</p>
+                    <p>Phone Number: {donor.PhoneNumber}</p>
                     <p>Address: {donor.Address}</p>
-                    <p>PINCODE: {donor.pincode}</p>
-                    <p>Blood type: {donor.BloodGrp}</p>
+                    <p>Pincode: {donor.Pincode}</p>
+                    <p>Blood type: {donor["Blood Group"]}</p>
                   </div>
                 </div>)
             })

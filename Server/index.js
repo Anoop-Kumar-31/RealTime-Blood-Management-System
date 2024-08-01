@@ -272,7 +272,7 @@ app.post('/api/register', async (req, res) => {
   let { name, bloodtype, pin, phone, email, address, state, age } = req.body;
   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
 
-  const result = await collection.insertOne({ "Name":`${name}`, "Age":`${age}`, "PhoneNumber":`${phone}`, "Email":`${email}`, "Blood Group":`${fetchBtype}`, "Pincode": `${pin}`, "State":`${state}`,"Address":`${address}`, "Available":"Yes" });
+  const result = await collection.insertOne({ "Name":`${name}`, "Age":`${age}`, "PhoneNumber":`${phone}`, "Username":`${email}`, "Blood Group":`${fetchBtype}`, "Pincode": `${pin}`, "State":`${state}`,"Address":`${address}`, "Available":"Yes" });
   console.log(result);
   res.status(200).json({ success: true, message: 'Registration successful' });
   await client.close();
