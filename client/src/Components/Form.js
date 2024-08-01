@@ -37,7 +37,7 @@ export default function Form(){
             bloodGroup = bloodGroup.charAt(0)+ (bloodGroup.charAt(1) === "+" ? "1" : "0");
         }
 
-        fetch(`/api/register`, {
+        fetch(`https://realtime-blood-management-system.onrender.com/api/register`, {
             method: 'POST',
             mode: 'cors',
             headers: { 'Content-Type': 'application/json' },

@@ -29,7 +29,7 @@ export default function ApplyForBlood() {
         // return <ListOfDonor/>
         // what to write in full fetch url
         
-        fetch(`/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`, {
+        fetch(`https://realtime-blood-management-system.onrender.com/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         }).then(response => {
