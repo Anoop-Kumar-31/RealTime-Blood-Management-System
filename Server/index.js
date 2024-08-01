@@ -113,7 +113,7 @@ app.get("/api/fetch",async (req, res) => {
 
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-    const result = await await collection.find({ 
+    const result = await collection.find({ 
             "Blood Group": `${fetchBtype}`, 
             "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
           }).toArray();
