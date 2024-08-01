@@ -20,30 +20,28 @@ export default function ApplyForBlood() {
         setPin(value.pincode)
         setCurrentInfo(value)
         console.log(value)
-        let bloodGroup=value["bloodgroup"]
-        if(bloodGroup.length>2){
-            bloodGroup = bloodGroup.charAt(0) +bloodGroup.charAt(1)+ (bloodGroup.charAt(2) === "+" ? "1" : "0");
-        }else{
-            bloodGroup = bloodGroup.charAt(0)+ (bloodGroup.charAt(1) === "+" ? "1" : "0");
+        let bloodGroup = value["bloodgroup"]
+        if (bloodGroup.length > 2) {
+            bloodGroup = bloodGroup.charAt(0) + bloodGroup.charAt(1) + (bloodGroup.charAt(2) === "+" ? "1" : "0");
+        } else {
+            bloodGroup = bloodGroup.charAt(0) + (bloodGroup.charAt(1) === "+" ? "1" : "0");
         }
         // return <ListOfDonor/>
-        fetch(`https://bloodmanagementsystem-anoop.vercel.app/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`//
-            , {
-                method: 'GET',
-                // mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json',
-                 },
-                // body: JSON.stringify({pin:`${value.pincode}`,type:`${value.bloodgroup}`})
-            }).then(
-                response => response.json()
-            ).then(
-                data => {
-                    setDonors(data)
-                }
-            )
-        // .catch(error => console.error(error));
+        fetch(`https://bloodmanagementsystem-anoop.vercel.app/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }).then(data => {
+            setDonors(data)
+        }).catch(error => {
+            console.error('Error fetching data:', error);
+        });
+        console.log(currentInfo.name)
     }
-    console.log(currentInfo.name)
     return (
         [
             <EmailVerification name={currentInfo.name}/>,
