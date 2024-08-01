@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 
 
 
-const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app'];
+const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app','https://cloud.mongodb.com/v2/659d00764b708c6cd1788621#/clusters','https://cloud.mongodb.com/v2/659d00764b708c6cd1788621#/','https://cloud.mongodb.com/v2/','https://cloud.mongodb.com/'];
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin) return callback(null, true);

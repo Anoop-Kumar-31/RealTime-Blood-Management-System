@@ -18,7 +18,7 @@ const EmailVerification = (props) => {
   const handleSendOTP = async () => {
     try {
       // Make an API call to your server to send the OTP
-      const response = await fetch('https://bloodmanagementsystem-anoop.vercel.app/api/send-otp', {
+      const response = await fetch('/api/send-otp', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -49,7 +49,7 @@ const EmailVerification = (props) => {
     e.preventDefault();
     try {
       // Make an API call to your server to verify the OTP
-      const response = await fetch('https://realtime-blood-management-system.onrender.com/api/verify-otp', {
+      const response = await fetch('/api/verify-otp', {
         method: 'POST',
         mode: 'cors',
         headers: {
