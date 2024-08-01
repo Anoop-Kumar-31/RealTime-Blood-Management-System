@@ -36,11 +36,11 @@ export default function ListOfDonor(props) {
                   <div className="donor-card" key={donor.Name}>
                     <h2>{donor.Name}</h2><hr/>
                     <div className='donor-details'>
-                      <p>Email: {donor.Username}</p>
-                      <p>Phone Number: {donor.PhoneNumber}</p>
-                      <p>Address: {donor.Address}</p>
-                      <p>Pincode: {donor.Pincode}</p>
-                      <p>Blood type: {donor["Blood Group"]}</p>
+                      <p><b>Email:</b> {donor.Username}</p>
+                      <p><b>Phone Number:</b> {donor.PhoneNumber}</p>
+                      <p><b>Address:</b> {donor.Address}</p>
+                      <p><b>Pincode:</b> {donor.Pincode}</p>
+                      <p><b>Blood type:</b> {donor["Blood Group"]}</p>
                     </div>
                   </div>)
               } else {
@@ -55,11 +55,11 @@ export default function ListOfDonor(props) {
                 <div className="donor-card" key={donor.Name}>
                   <h2>{donor.Name}</h2><hr/>
                   <div className='donor-details'>
-                    <p>Email: {donor.Username}</p>
-                    <p>Phone Number: {donor.PhoneNumber}</p>
-                    <p>Address: {donor.Address}</p>
-                    <p>Pincode: {donor.Pincode}</p>
-                    <p>Blood type: {donor["Blood Group"]}</p>
+                    <p><b>Email:</b> {donor.Username}</p>
+                    <p><b>Phone Number:</b> {donor.PhoneNumber}</p>
+                    <p><b>Address:</b> {donor.Address}</p>
+                    <p><b>Pincode:</b> {donor.Pincode}</p>
+                    <p><b>Blood type:</b> {donor["Blood Group"]}</p>
                   </div>
                 </div>)
             })
