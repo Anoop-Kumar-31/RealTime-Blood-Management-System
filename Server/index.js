@@ -112,12 +112,15 @@ app.get("https://bloodmanagementsystem-anoop.vercel.app/api/fetch",async (req, r
     const collection = database.collection("collection1");
 
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
-    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodytype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
     const result = await collection.find({ blood_group: fetchBtype, pincode: { $gte: pin - 10, $lte: pin + 10 } }).toArray();
     console.log(result);
     res.json(result);
     await client.close();
-  }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+    }
 }
 //   const uri =
 //     "mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
