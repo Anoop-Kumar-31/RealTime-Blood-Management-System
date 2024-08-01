@@ -37,7 +37,7 @@ const PhoneNumberVerification = () => {
         e.preventDefault();
         try {
           // Make an API call to your server to verify the OTP
-          const response = await fetch('https://realtime-blood-management-system.onrender.com/api/verify-otp', {
+          const response = await fetch('https://bloodmanagementsystem-anoop.vercel.app/api/verify-otp', {
             method: 'POST',
             mode: 'cors',
             headers: {
