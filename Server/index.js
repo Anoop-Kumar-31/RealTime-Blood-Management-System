@@ -110,20 +110,44 @@ app.get("/api/fetch",async (req, res) => {
     await client.connect();
     const database = client.db("RTBMSdatabase");
     const collection = database.collection("collection1");
-
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+    pin=Number(pin);
     const result = await collection.find({ 
-            "Blood Group": `${fetchBtype}`, 
-            "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
-          }).toArray();
+      "Blood Group": `${fetchBtype}`, 
+      "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
+    }).toArray();
+
     console.log(result);
-    res.json(result);
+    // Assuming `res` is defined somewhere in your code
+    // res.json(result);
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  } finally {
     await client.close();
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ success: false, message: 'Internal server error' });
-    }
+  }
+  // const uri = "mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31"; // Replace with your actual MongoDB connection string
+  // const client = new MongoClient(uri);
+
+  // try {
+  //   await client.connect();
+  //   const database = client.db("RTBMSdatabase");
+  //   const collection = database.collection("collection1");
+
+  //   const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+  //   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+  //   const result = await collection.find({ 
+  //           "Blood Group": `${fetchBtype}`, 
+  //           "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
+  //         }).toArray();
+  //   console.log(result);
+  //   res.json(result);
+  //   await client.close();
+  //   } catch (err) {
+  //     console.error(err);
+  //     res.status(500).json({ success: false, message: 'Internal server error' });
+  //   }
 }
 //   const uri =
 //     "mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
