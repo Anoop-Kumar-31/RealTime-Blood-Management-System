@@ -109,7 +109,7 @@ app.get("/api/fetch",async (req, res) => {
     await client.connect();
     const database = client.db("RTBMSdatabase");
     const collection = database.collection("collection1");
-    const {pin, bloodtype} = req.query;
+    let {pin, bloodtype} = req.query;
 
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
     pin=Number(pin);
@@ -269,7 +269,7 @@ app.post('/api/register', async (req, res) => {
   const database = client.db("RTBMSdatabase");
   const collection = database.collection("collection1");
 
-  const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+  let { name, bloodtype, pin, phone, email, address, state, age } = req.body;
   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
 
   const result = await collection.insertOne({ "Name":`${name}`, "Age":`${age}`, "PhoneNumber":`${phone}`, "Email":`${email}`, "Blood Group":`${fetchBtype}`, "Pincode": `${pin}`, "State":`${state}`,"Address":`${address}`, "Available":"Yes" });
