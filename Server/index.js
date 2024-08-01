@@ -11,8 +11,7 @@ const { MongoClient } = require("mongodb");
 
 //LyVQhObJ05eD0Aub
 
-const e = require("express");
-
+// const e = require("express");
 let sendOtp=0
 
 const app = express();
@@ -110,7 +109,7 @@ app.get("/api/fetch",async (req, res) => {
     await client.connect();
     const database = client.db("RTBMSdatabase");
     const collection = database.collection("collection1");
-    const {bloodtype, pin} = req.body;
+    const {pin, bloodtype} = req.body;
 
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
     pin=Number(pin);
