@@ -109,7 +109,7 @@ app.get("/api/fetch",async (req, res) => {
     await client.connect();
     const database = client.db("RTBMSdatabase");
     const collection = database.collection("collection1");
-    const {pin, bloodtype} = req.body;
+    const {pin, bloodtype} = req.query;
 
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
     pin=Number(pin);
@@ -120,9 +120,9 @@ app.get("/api/fetch",async (req, res) => {
 
     console.log(result);
     // Assuming `res` is defined somewhere in your code
-    // res.json(result);
+    res.json(result);
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
+    console.error('Error :', error);
   } finally {
     await client.close();
   }
