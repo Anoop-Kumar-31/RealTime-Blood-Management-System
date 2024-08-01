@@ -36,6 +36,7 @@ export default function ApplyForBlood() {
             }
             return response.json();
         }).then(data => {
+            console.log(data)
             setDonors(data)
         }).catch(error => {
             console.error('Error fetching data:', error);
