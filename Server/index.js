@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 // }
 // testDbConnection();
 
-app.get("https://bloodmanagementsystem-anoop.vercel.app/api/fetch",async (req, res) => {
+app.get("/api/fetch",async (req, res) => {
   //connect db
   // const client = await pool.connect();
 
@@ -155,7 +155,7 @@ var smtpConfig = {
 
 const transporter = nodemailer.createTransport(smtpConfig);
 
-app.post('https://bloodmanagementsystem-anoop.vercel.app/api/send-otp', (req, res) => {
+app.post('/api/send-otp', (req, res) => {
   const { email } = req.body;
   if (!email) {
     return res.status(400).json({ error: 'Email is required' });
@@ -200,7 +200,7 @@ app.post('https://bloodmanagementsystem-anoop.vercel.app/api/send-otp', (req, re
   });
 });
 
-app.post('https://bloodmanagementsystem-anoop.vercel.app/api/verify-otp', (req, res) => {
+app.post('/api/verify-otp', (req, res) => {
   const { email, otp } = req.body;
   if (!email || !otp) {
     return res.status(400).json({ error: 'Email and OTP are required' });
@@ -215,7 +215,7 @@ app.post('https://bloodmanagementsystem-anoop.vercel.app/api/verify-otp', (req, 
 
 
 
-app.post('https://bloodmanagementsystem-anoop.vercel.app/api/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
   // const client = await connectDb();
   // try {
   //   const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
