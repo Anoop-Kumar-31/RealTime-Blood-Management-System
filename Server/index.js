@@ -110,7 +110,7 @@ app.get("/api/fetch",async (req, res) => {
     await client.connect();
     const database = client.db("RTBMSdatabase");
     const collection = database.collection("collection1");
-    const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+    const {bloodtype, pin} = req.body;
 
     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
     pin=Number(pin);
