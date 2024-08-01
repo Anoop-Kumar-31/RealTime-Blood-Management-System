@@ -154,7 +154,7 @@ app.post('https://bloodmanagementsystem-anoop.vercel.app/api/send-otp', (req, re
 
   // Generate the OTP (you may use any OTP generation logic here)
   const otp = Math.floor(1000 + Math.random() * 9000);
-  // console.log(otp)
+  console.log(otp)
   // Send email using Nodemailer
   const mailOptions = {
     from: emailUsername,
