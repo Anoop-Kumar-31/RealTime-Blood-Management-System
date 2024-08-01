@@ -112,8 +112,11 @@ app.get("/api/fetch",async (req, res) => {
     const collection = database.collection("collection1");
 
     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
-    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodytype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-    const result = await collection.find({ blood_group: fetchBtype, pincode: { $gte: pin - 10, $lte: pin + 10 } }).toArray();
+    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+    const result = await await collection.find({ 
+            "Blood Group": `${fetchBtype}`, 
+            "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
+          }).toArray();
     console.log(result);
     res.json(result);
     await client.close();
@@ -246,7 +249,7 @@ app.post('/api/register', async (req, res) => {
   const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
 
-  const result = await collection.insertOne({ name, age, phone, email, blood_group: fetchBtype, pincode: pin, state, address, day_free: '' });
+  const result = await collection.insertOne({ "Name":`${name}`, "Age":`${age}`, "PhoneNumber":`${phone}`, "Email":`${email}`, "Blood Group":`${fetchBtype}`, "Pincode": `${pin}`, "State":`${state}`,"Address":`${address}`, "Available":"Yes" });
   console.log(result);
   res.status(200).json({ success: true, message: 'Registration successful' });
   await client.close();
