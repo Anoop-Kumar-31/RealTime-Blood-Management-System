@@ -27,7 +27,7 @@ export default function ApplyForBlood() {
             bloodGroup = bloodGroup.charAt(0)+ (bloodGroup.charAt(1) === "+" ? "1" : "0");
         }
         // return <ListOfDonor/>
-        fetch(`/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`//
+        fetch(`https://bloodmanagementsystem-anoop.vercel.app/api/fetch?pin=${value["pincode"]}&type=${bloodGroup}`//
             , {
                 method: 'GET',
                 // mode: 'no-cors',
