@@ -227,10 +227,10 @@ ul{
 }
 input{
   border: none;
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--Heading);
   background: transparent;
   outline: none;
-  color: var(--primary-color);
+  color: var(--Heading);
   font-size: 1.7vh;
   font-weight: 600;
   margin: 1vh 0;
@@ -425,26 +425,42 @@ p{
 
 .Verification{
   position:fixed;
-  height: 101%;
+  display: flex;
+  height: 100%;
   width: 101%;
+  z-index: 99999;
   backdrop-filter: blur(3px);
   /* transform: translateY(); */
-  transform: translate(-4.2%,-18.5%);
+  transform: translate(-3.5%,-16%);
   /* transform: translateX(-10vw); */
+  align-items: center;
+  justify-content: center;
 }
 .InsideVerification{
-  transform: translateY(20vh);
-  background-color: #fcdddd;
+  /* transform: translateY(20vh); */
+  background-color: var(--table_text);
   border-radius: 30px;
   min-width: 400px;
   width:50%;
   height: 50%;
   margin: auto;
-  box-shadow: var(--primary-color) 0px 0px 5px;
+  box-shadow: var(--table_heading) 0px 0px 5px;
   padding: 2vh 5vw 5vh 5vw;
-  backdrop-filter: blur(5px);
+  /* backdrop-filter: blur(5px); */
 }
-
+.InsideVerification p{
+  color: var(--Heading);
+  text-shadow: none !important;
+}
+.InsideVerification .form>label{
+  color: var(--Heading);
+  font-weight: bold !important;
+  text-shadow: none !important;
+}
+.InsideVerification .form>input{
+  width: 65% !important;
+  margin-right:15px;
+}
 .area1{
   grid-area: area1;
   text-align: justify;

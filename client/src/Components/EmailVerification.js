@@ -80,7 +80,7 @@ const EmailVerification = (props) => {
         Apologies for the inconvenience.</p><br/>
         <p>Please verify your Email ID!</p>
         {otpSent ? (
-          <form onSubmit={handleSubmitOTP}>
+          <form onSubmit={handleSubmitOTP} className="form">
             <label>
               Email:
             </label><br/>
@@ -105,7 +105,7 @@ const EmailVerification = (props) => {
             <button type="submit" style={{margin:'0',padding:'0.8vh 0.9vw'}}>Verify</button>
           </form>        
         ) : (
-          <div >
+          <div  className="form">
             <label>
               Email:
             </label><br/>
