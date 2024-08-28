@@ -40,7 +40,7 @@ export default function Form(){
         fetch(`https://realtime-blood-management-system.onrender.com/api/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(valueDATA),
+            body: JSON.stringify(valueDATA)
           })
             .then((response) => response.json())
             .then((data) => {
