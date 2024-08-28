@@ -48,7 +48,7 @@ export default function ListOfDonor(props) {
           })
         }
         <h1>Recommenation</h1>
-        {
+        { Recommenation !=0?
           Recommenation.map(donor => {
             return (
               <div className="donor-card" key={donor.Name}>
@@ -61,14 +61,17 @@ export default function ListOfDonor(props) {
                   <p><b>Blood type:</b> {donor["Blood Group"]}</p>
                 </div>
               </div>)
-          })
+          }):
+          <div>
+            <p>No Recommendation Nearby</p>
+          </div>
         }
       </div>
     );
   } else {
     return (
       <div className="donors-list" style={{ display: 'flex', justifyContent: 'center', color: 'red' }}>
-        No Eligible Donor at this location! orLoading... Please wait!
+        No Eligible Donor at this location!
       </div>
     )
   }
