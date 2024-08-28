@@ -248,7 +248,7 @@ textarea{
   font-weight: 600;
   margin: 1vh 0;
 }
-select{
+/* select{
   border: none;
   border-bottom: 1px solid var(--primary-color);
   background: transparent;
@@ -261,7 +261,7 @@ select{
   height:fit-content;
   padding:0.5vh 0;
   max-width: 50px;
-}
+} */
 #date, #time{
   width: 150px;
 }
@@ -303,7 +303,51 @@ option{
   /* background-color: #FFFFFF; */
   border-radius: 60px;
 }
-
+.formBox label{
+  position: absolute;
+  font-size: medium;
+  font-weight: 600;
+  color: var(--Heading);
+  background-color: var(--bg);
+  transform: translate(10px,15px);
+  text-shadow: var(--shadow-color) 1px 1px 1px;
+}
+.formBox input:focus{
+  box-shadow: rgb(162, 162, 255) 0 0 1px 2px;
+  border-color: var(--table_bg);
+}
+.formBox input{
+  border: var(--table_heading) 2px solid;
+  padding: 2% 2%;
+  border-radius: 8px;
+  width: 80%;
+}
+.formBox select{
+  border: var(--table_heading) 2px solid;
+  padding:2% 15% 2% 2%;
+  border-radius: 8px;
+  background-color: var(--bg);
+  margin-top: 6.5px;
+}
+.formBox select:focus{
+  box-shadow: rgb(162, 162, 255) 0 0 1px 2px;
+  border-color: var(--table_bg);
+}
+.formBox #sub{
+  background-color: var(--table_cell);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: var(--table_text);
+  font-size: large;
+  font-weight:bolder;
+  cursor: pointer;
+  margin-top: 2vh;
+  transition: 0.3s;
+}
+.formBox #sub:hover{
+  transform: scale(1.05);
+}
 /* .App {
   text-align: center;
 }
@@ -413,10 +457,10 @@ p{
 .donor-card{
   margin: 2vh 3vw;
   padding: 2vh 3vw;
-  background-color: #ffd6d6;
+  background-color: var(--bg);
   border-radius: 30px;
   width: 44%;
-  box-shadow: var(--shadow-color) 2px 2px 2px;
+  box-shadow: grey 0px 0px 2px;
 }
 .donor-details{
   line-height: 3.5vh;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import '../App.css';
 import ListOfDonor from "./ListOfDonor";
 import EmailVerification from "./EmailVerification";
@@ -58,7 +58,7 @@ export default function ApplyForBlood() {
                     <input type="tel" id="phone" name="phone" placeholder="Your phone.." /><br />
                     <label for="age">Age</label><br />
                     <input type="number" id="age" name="age" placeholder="Your age.." /><br />
-                    <label for="bloodgroup">Blood Group</label><br />
+                    <label for="bloodgroup">Blood Group</label><br/>
                     <select id="bloodgroup" name="bloodgroup">
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
