@@ -1,8 +1,8 @@
 import AK from './images/people/AK.jpg'
-import AKS from './images/people/AKS.jpg'
-import DAS from './images/people/DAS.jpg'
-import Ishica from './images/people/Ishica.jpg'
-import Sakshi from './images/people/Sakshi.jpg'
+// import AKS from './images/people/AKS.jpg'
+// import DAS from './images/people/DAS.jpg'
+// import Ishica from './images/people/Ishica.jpg'
+// import Sakshi from './images/people/Sakshi.jpg'
 const people = [
     {
         id: 1,
@@ -16,6 +16,7 @@ const people = [
             github: 'https://github.com/Anoop-Kumar-31',
             instagram: 'https://www.instagram.com/anoopkumar_ak31/',
         },
+        portfolio: 'https://myportfolio-kto7.onrender.com/',
     },
     // {
     //     id: 2,
