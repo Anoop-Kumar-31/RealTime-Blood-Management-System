@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import '../App.css'
 
 export default function ListOfDonor(props) {  
@@ -24,33 +24,13 @@ export default function ListOfDonor(props) {
     // console.log(props["donors"])
     // console.log(props["pin"])
     // console.log(props["submitted"])
-  if (props["submitted"]) {
-    if (props["donors"].length > 0) {
-      return (
-        <div className="donors-list">
-          <h1>List of Donors</h1>
-          {
-            props["donors"].map(donor => {
-              if (donor.Pincode == props["pin"]) {
-                return (
-                  <div className="donor-card" key={donor.Name}>
-                    <h2>{donor.Name}</h2><hr/>
-                    <div className='donor-details'>
-                      <p><b>Email:</b> {donor.Username}</p>
-                      <p><b>Phone Number:</b> {donor.PhoneNumber}</p>
-                      <p><b>Address:</b> {donor.Address}</p>
-                      <p><b>Pincode:</b> {donor.Pincode}</p>
-                      <p><b>Blood type:</b> {donor["Blood Group"]}</p>
-                    </div>
-                  </div>)
-              } else {
-                Recommenation.push(donor)
-              }
-            })
-          }
-          <h1>Recommenation</h1>
-          {
-            Recommenation.map(donor => {
+  if (props["donors"].length > 0) {
+    return (
+      <div className="donors-list">
+        <h1>List of Donors</h1>
+        {
+          props["donors"].map(donor => {
+            if (donor.Pincode == props["pin"]) {
               return (
                 <div className="donor-card" key={donor.Name}>
                   <h2>{donor.Name}</h2><hr/>
@@ -62,21 +42,33 @@ export default function ListOfDonor(props) {
                     <p><b>Blood type:</b> {donor["Blood Group"]}</p>
                   </div>
                 </div>)
-            })
-          }
-        </div>
-      );
-    } else {
-      return (
-        <div className="donors-list" style={{ display: 'flex', justifyContent: 'center', color: 'red' }}>
-          No Eligible Donor at this location!
-        </div>
-      )
-    }
+            } else {
+              Recommenation.push(donor)
+            }
+          })
+        }
+        <h1>Recommenation</h1>
+        {
+          Recommenation.map(donor => {
+            return (
+              <div className="donor-card" key={donor.Name}>
+                <h2>{donor.Name}</h2><hr/>
+                <div className='donor-details'>
+                  <p><b>Email:</b> {donor.Username}</p>
+                  <p><b>Phone Number:</b> {donor.PhoneNumber}</p>
+                  <p><b>Address:</b> {donor.Address}</p>
+                  <p><b>Pincode:</b> {donor.Pincode}</p>
+                  <p><b>Blood type:</b> {donor["Blood Group"]}</p>
+                </div>
+              </div>)
+          })
+        }
+      </div>
+    );
   } else {
     return (
-      <div className="donors-list" style={{ display: 'flex', justifyContent: 'center' }}>
-        List of donors will be shown below
+      <div className="donors-list" style={{ display: 'flex', justifyContent: 'center', color: 'red' }}>
+        No Eligible Donor at this location! orLoading... Please wait!
       </div>
     )
   }

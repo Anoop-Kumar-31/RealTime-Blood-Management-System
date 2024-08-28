@@ -7,6 +7,7 @@ import EmailVerification from "./EmailVerification";
 export default function ApplyForBlood() {
 
     const [donors, setDonors] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [currentInfo, setCurrentInfo]= useState({});
     const [submitted, setSubmitted] = useState(false);
     // console.log(donors[1])
@@ -39,6 +40,8 @@ export default function ApplyForBlood() {
             return response.json();
         }).then(data => {
             setDonors(data)
+        }).then( data=>{
+            setLoading(false)
         }).catch(error => {
             console.error('Error fetching data:', error);
         });
@@ -88,6 +91,12 @@ export default function ApplyForBlood() {
                     <input id="sub" type="submit" value="Submit" />
                 </form>
             </div>,
+
+            loading? 
+            <div className="donors-list" style={{ display: 'flex', justifyContent: 'center' }}>
+                List of donors will be shown below
+            </div> 
+            :
             <ListOfDonor donors={donors} submitted={submitted} pin={pin}/>
         ]
     );
