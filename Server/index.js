@@ -29,7 +29,7 @@ const cors = require('cors');
 
 
 
-const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app','https://realtime-blood-management-system.onrender.com'];
+const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', 'https://realtime-blood-management-system.onrender.com/api/register','https://realtime-blood-management-system.onrender.com'];
 // app.use(cors({
 //   origin: function(origin, callback) {
 //     if (!origin) return callback(null, true);
