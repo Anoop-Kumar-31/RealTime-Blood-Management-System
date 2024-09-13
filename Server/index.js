@@ -19,29 +19,45 @@ app.use(bodyParser.json());
 const portNumber = process.env.PORT || 5432;//10000
 
 const cors = require('cors');
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'application/json');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'application/json');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 
 
 
 const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app','https://realtime-blood-management-system.onrender.com'];
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     if (!origin) return callback(null, true);
+//     if (allowedOrigins.indexOf(origin) === -1) {
+//       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+//       return callback(new Error(msg), false);
+//     }
+//     return callback(null, true);
+//   },
+//   methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
+//   allowedHeaders: 'X-Requested-With,content-type',
+//   credentials: true
+// }));
+
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
+  origin: function (origin, callback) {
+    // Check if origin is not provided or is allowed
+    if (!origin || allowedOrigins.includes(origin)) {
+      // Allow the request with credentials
+      callback(null, { credentials: true });
+    } else {
+      // Reject request with a clear error message
+      const message = 'The CORS policy for this site does not allow access from the specified origin.';
+      callback(new Error(message), false);
     }
-    return callback(null, true);
   },
   methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
-  allowedHeaders: 'X-Requested-With,content-type',
-  credentials: true
+  allowedHeaders: 'X-Requested-With,Content-Type' // Corrected case for consistency
 }));
 
 // app.use((req, res, next) => {
