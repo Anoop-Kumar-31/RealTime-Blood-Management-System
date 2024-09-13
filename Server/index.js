@@ -44,15 +44,15 @@ app.use(cors({
   credentials: true
 }));
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Content-Type', 'application/json');
-  req.header('Access-Control-Expose-Headers', 'Content-Type')
-  next();
-})
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   res.header('Access-Control-Allow-Credentials', true);
+//   res.header('Content-Type', 'application/json');
+//   req.header('Access-Control-Expose-Headers', 'Content-Type')
+//   next();
+// })
 
 // const pool = new Pool({
 //   connectionString: "postgres://anoop:UBPX01OmTQjjOx3qprqskQIwuozdDIc9@dpg-cp6b6m0l6cac738hrmcg-a.oregon-postgres.render.com/rdbms?sslmode=no-verify",
