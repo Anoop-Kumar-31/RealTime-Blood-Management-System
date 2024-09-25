@@ -16,6 +16,7 @@ let sendOtp=0
 
 const app = express();
 app.use(bodyParser.json());
+app.use(app.json());
 const portNumber = process.env.PORT || 5432;//10000
 
 const cors = require('cors');
@@ -52,7 +53,7 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  methods: 'POST,GET,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Content-Type,Authorization'
 }));
 
@@ -93,27 +94,30 @@ app.use(cors({
 // }
 // testDbConnection();
 
+
+app.post('/api/register', async (req, res) => {
+  const uri ="mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
+  const client = new MongoClient(uri);
+  try{
+    await client.connect();
+    const database = client.db("RTBMSdatabase");
+    const collection = database.collection("collection1");
+
+    let { name, bloodtype, pin, phone, email, address, state, age } = req.body;
+    let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
+
+    const result = await collection.insertOne({ "Name":`${name}`, "Age":`${age}`, "PhoneNumber":`${phone}`, "Username":`${email}`, "Blood Group":`${fetchBtype}`, "Pincode": `${pin}`, "State":`${state}`,"Address":`${address}`, "Available":"Yes" });
+    console.log(result);
+    res.status(200).json({ success: true, message: 'Registration successful' });
+    // await client.close();
+  }catch (error) {
+    console.error('Error :', error);
+  } finally {
+    await client.close();
+  }
+});
+
 app.get("/api/fetch",async (req, res) => {
-  //connect db
-  // const client = await pool.connect();
-
-  // try {
-  //   const fetchpin = parseInt(req.query.pin, 10);
-  //   const fetchType = req.query.type;
-  //   let fetchBtype = fetchType.length > 2 ? fetchType.charAt(0) + fetchType.charAt(1) + (fetchType.charAt(2) === "1" ? "+" : "-") : fetchType.charAt(0) + (fetchType.charAt(1) === "1" ? "+" : "-");
-
-  //   const query = `SELECT * FROM donors WHERE blood_group = $1 AND pincode BETWEEN $2 AND $3 ORDER BY pincode`;
-  //   const values = [fetchBtype, fetchpin - 10, fetchpin + 10];
-
-  //   const result = await client.query(query, values);
-  //   console.log(res)
-  //   res.json(result.rows);
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).json({ "Message": "error" });
-  // } finally {
-  //   client.release();
-  // }
   const uri = "mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31"; // Replace with your actual MongoDB connection string
   const client = new MongoClient(uri);
 
@@ -138,43 +142,7 @@ app.get("/api/fetch",async (req, res) => {
   } finally {
     await client.close();
   }
-  // const uri = "mongodb+srv://amt312002:i8tdtdM0TkQYquVH@ak31.ptkvm4r.mongodb.net/RTBMSdatabase?retryWrites=true&w=majority&appName=Ak31"; // Replace with your actual MongoDB connection string
-  // const client = new MongoClient(uri);
-
-  // try {
-  //   await client.connect();
-  //   const database = client.db("RTBMSdatabase");
-  //   const collection = database.collection("collection1");
-
-  //   const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
-  //   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-  //   const result = await collection.find({ 
-  //           "Blood Group": `${fetchBtype}`, 
-  //           "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}` } 
-  //         }).toArray();
-  //   console.log(result);
-  //   res.json(result);
-  //   await client.close();
-  //   } catch (err) {
-  //     console.error(err);
-  //     res.status(500).json({ success: false, message: 'Internal server error' });
-  //   }
-}
-//   const uri =
-//     "mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
-//     const client = new MongoClient(uri);
-//     await client.connect();
-//     const database = client.db("RTBMSdatabase");
-//     const collection = database.collection("collection1");
-
-//     const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
-//     let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-//     const result = await collection.find({ "Blood Group": `${fetchBtype}`, "Pincode": { $gte: `${pin - 10}`, $lte: `${pin + 10}`} }).toArray();
-//     console.log(result);
-//     res.json(result);
-//     await client.close();
-// }
-);
+});
 
 // email OTP generation transport and verification
 const emailUsername = 'amt312002@gmail.com';
@@ -251,44 +219,6 @@ app.post('/api/verify-otp', (req, res) => {
   }
 });
 
-
-
-app.post('/api/register', async (req, res) => {
-  // const client = await connectDb();
-  // try {
-  //   const { name, bloodtype, pin, phone, email, address, state, age } = req.body;
-
-  //   let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-
-  //   const result = await client.query('SELECT COUNT(id) AS count FROM donors');
-  //   const count = result.rows[0].count;
-
-  //   const Query = `INSERT INTO donors (id, name, age, phone, email, blood_group, pincode, state, address, day_free) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, '')`;
-  //   const values = [count + 1, name, age, phone, email, fetchBtype, pin, state, address];
-
-  //   await client.query(Query, values);
-  //   res.status(200).json({ success: true, message: 'Registration successful' });
-  // } catch (err) {
-  //   console.error(err);
-  //   res.status(500).json({ success: false, message: 'Internal server error' });
-  // } finally {
-  //   client.release();
-  // }
-  
-  const uri ="mongodb+srv://amt312002:ZeroToNine_0123456789@ak31.ptkvm4r.mongodb.net/?retryWrites=true&w=majority&appName=Ak31";
-  const client = new MongoClient(uri);
-  await client.connect();
-  const database = client.db("RTBMSdatabase");
-  const collection = database.collection("collection1");
-
-  let { name, bloodtype, pin, phone, email, address, state, age } = req.body;
-  let fetchBtype = bloodtype.length > 2 ? bloodtype.charAt(0) + bloodtype.charAt(1) + (bloodtype.charAt(2) === '1' ? '+' : '-') : bloodtype.charAt(0) + (bloodtype.charAt(1) === '1' ? '+' : '-');
-
-  const result = await collection.insertOne({ "Name":`${name}`, "Age":`${age}`, "PhoneNumber":`${phone}`, "Username":`${email}`, "Blood Group":`${fetchBtype}`, "Pincode": `${pin}`, "State":`${state}`,"Address":`${address}`, "Available":"Yes" });
-  console.log(result);
-  res.status(200).json({ success: true, message: 'Registration successful' });
-  await client.close();
-});
 
 app.listen(portNumber, () => {
   console.log(`Server is listening on port ${portNumber}`)
