@@ -16,7 +16,7 @@ let sendOtp=0
 
 const app = express();
 app.use(bodyParser.json());
-app.use(app.json());
+// app.use(app.json());
 const portNumber = process.env.PORT || 5432;//10000
 
 const cors = require('cors');
