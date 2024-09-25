@@ -45,19 +45,20 @@ const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', 'https
 // }));
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Check if origin is not provided or is allowed
-    if (!origin || allowedOrigins.includes(origin)) {
-      // Allow the request with credentials
-      callback(null, { credentials: true });
-    } else {
-      // Reject request with a clear error message
-      const message = 'The CORS policy for this site does not allow access from the specified origin.';
-      callback(new Error(message), false);
-    }
-  },
-  methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
-  allowedHeaders: 'X-Requested-With,Content-Type' // Corrected case for consistency
+  // origin: function (origin, callback) {
+  //   // Check if origin is not provided or is allowed
+  //   if (!origin || allowedOrigins.includes(origin)) {
+  //     // Allow the request with credentials
+  //     callback(null, { credentials: true });
+  //   } else {
+  //     // Reject request with a clear error message
+  //     const message = 'The CORS policy for this site does not allow access from the specified origin.';
+  //     callback(new Error(message), false);
+  //   }
+  // },
+  // methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
+  // allowedHeaders: 'X-Requested-With,Content-Type' // Corrected case for consistency
+  origin:"https://bloodmanagementsystem-anoop.vercel.app/"
 }));
 
 // app.use((req, res, next) => {
