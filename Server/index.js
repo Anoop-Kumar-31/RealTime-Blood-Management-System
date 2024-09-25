@@ -29,7 +29,7 @@ const cors = require('cors');
 
 
 
-const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', 'https://realtime-blood-management-system.onrender.com/Form','https://realtime-blood-management-system.onrender.com'];
+const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', 'https://bloodmanagementsystem-anoop.vercel.app/Form','https://realtime-blood-management-system.onrender.com'];
 // app.use(cors({
 //   origin: function(origin, callback) {
 //     if (!origin) return callback(null, true);
@@ -45,20 +45,15 @@ const allowedOrigins = ['https://bloodmanagementsystem-anoop.vercel.app', 'https
 // }));
 
 app.use(cors({
-  // origin: function (origin, callback) {
-  //   // Check if origin is not provided or is allowed
-  //   if (!origin || allowedOrigins.includes(origin)) {
-  //     // Allow the request with credentials
-  //     callback(null, { credentials: true });
-  //   } else {
-  //     // Reject request with a clear error message
-  //     const message = 'The CORS policy for this site does not allow access from the specified origin.';
-  //     callback(new Error(message), false);
-  //   }
-  // },
-  // methods: 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
-  // allowedHeaders: 'X-Requested-With,Content-Type' // Corrected case for consistency
-  origin:"https://bloodmanagementsystem-anoop.vercel.app/"
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization'
 }));
 
 // app.use((req, res, next) => {
