@@ -112,6 +112,7 @@ app.post('/api/register', async (req, res) => {
     // await client.close();
   }catch (error) {
     console.error('Error :', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   } finally {
     await client.close();
   }
