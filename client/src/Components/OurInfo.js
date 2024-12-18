@@ -1,7 +1,7 @@
 import AK from './images/people/AK.jpg'
 // import AKS from './images/people/AKS.jpg'
 // import DAS from './images/people/DAS.jpg'
-// import Ishica from './images/people/Ishica.jpg'
+import Ishica from './images/people/Ishica.jpg'
 // import Sakshi from './images/people/Sakshi.jpg'
 const people = [
     {
