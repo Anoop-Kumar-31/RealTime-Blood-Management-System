@@ -44,19 +44,19 @@ const people = [
     //         instagram: 'https://www.instagram.com/a_n_k_i_t__d_h_u_r_i_y_a/',
     //     },
     // },
-    // {
-    //     id: 4,
-    //     name: 'Ishica',
-    //     image: Ishica,
-    //     about: 'I am Ishica, and I take immense pride in my scholastic distinction earned from the esteemed Scholars Rosary Senior Secondary School, nestled in the revered locale of Bohar in Rohtak. Currently, I am wholeheartedly engrossed in an unwavering pursuit of knowledge as I embark upon a profound and transformative educational odyssey within the exalted realm of a Bachelor of Engineering program, with a dedicated focus on the perpetually evolving domain of Computer Science Engineering at Chandigarh University, Mohali.',
-    //     phone: '+91 720-603-9400',
-    //     email: 'ishica170304@gmail.com',
-    //     social: {
-    //         linkedin: 'https://www.linkedin.com/in/ishica-dua-845a18263/',
-    //         github: 'https://www.github.com/',
-    //         instagram: 'https://www.instagram.com/iishicaa/',
-    //     },
-    // },
+    {
+        id: 4,
+        name: 'Ishica',
+        image: Ishica,
+        about: 'I am Ishica, and I take immense pride in my scholastic distinction earned from the esteemed Scholars Rosary Senior Secondary School, nestled in the revered locale of Bohar in Rohtak. Currently, I am wholeheartedly engrossed in an unwavering pursuit of knowledge as I embark upon a profound and transformative educational odyssey within the exalted realm of a Bachelor of Engineering program, with a dedicated focus on the perpetually evolving domain of Computer Science Engineering at Chandigarh University, Mohali.',
+        phone: '+91 720-603-9400',
+        email: 'ishica170304@gmail.com',
+        social: {
+            linkedin: 'https://www.linkedin.com/in/ishica-dua-845a18263/',
+            github: 'https://www.github.com/',
+            instagram: 'https://www.instagram.com/iishicaa/',
+        },
+    },
     // {
     //     id: 5,
     //     name: 'Sakshi Bajpai',
